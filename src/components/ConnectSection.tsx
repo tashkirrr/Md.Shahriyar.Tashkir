@@ -1,7 +1,6 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
 import emailjs from "@emailjs/browser";
-import TiltCard from "@/components/ui/tilt-card";
 import {
   Linkedin, Github, Twitter, PenTool, Facebook, Instagram,
   ExternalLink, Copy, Check, Send, Music, MessageCircle, Download
@@ -60,8 +59,7 @@ const ConnectSection = () => {
             <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wide">Professional</h3>
             <div className="flex flex-col flex-1 gap-4">
               {primaryNodes.map((node) => (
-                <TiltCard
-                  as="a"
+                <a
                   key={node.label}
                   href={node.href}
                   target="_blank"
@@ -75,7 +73,7 @@ const ConnectSection = () => {
                   <p className="text-foreground text-sm font-semibold">{node.label}</p>
                 </div>
                 <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                </TiltCard>
+                </a>
               ))}
             </div>
           </motion.div>
@@ -90,8 +88,7 @@ const ConnectSection = () => {
             <h3 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wide">Social</h3>
             <div className="flex flex-col flex-1 gap-4">
               {socialGrid.map((s) => (
-                <TiltCard
-                  as="a"
+                <a
                   key={s.label}
                   href={s.href}
                   target="_blank"
@@ -101,7 +98,7 @@ const ConnectSection = () => {
                 <s.icon size={20} className="text-primary" />
                 <span className="text-foreground text-sm font-semibold flex-1">{s.label}</span>
                 <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                </TiltCard>
+                </a>
             ))}
             <DiscordCard />
             <SpotifyWebSocketCard />

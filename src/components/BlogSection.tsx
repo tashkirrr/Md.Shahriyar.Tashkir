@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState, useCallback } from "react";
-import { ExternalLink, BookOpen, ArrowRight, X, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";import TiltCard from "@/components/ui/tilt-card";
+import { ExternalLink, BookOpen, ArrowRight, X, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
 interface MediumPost {
   title: string;
   link: string;
@@ -114,14 +114,12 @@ const BlogSection = () => {
         ) : posts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {pagedPosts.map((post, i) => (
-              <TiltCard
+              <motion.div
                 key={post.link}
-                as="div"
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="bento-item group cursor-pointer min-h-[160px] flex flex-col"
-                style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
                 onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
               >
                 {post.thumbnail && (
@@ -184,7 +182,7 @@ const BlogSection = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-            </TiltCard>
+            </motion.div>
           ))}
           </div>
         ) : (
