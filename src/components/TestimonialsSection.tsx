@@ -37,7 +37,7 @@ const TestimonialsSection = () => {
           <h2 className="heading-display text-3xl sm:text-4xl text-foreground mb-2">
             What People <span className="text-gradient">Say</span>
           </h2>
-          <p className="font-mono text-xs text-muted-foreground mb-12">// testimonials.fetch()</p>
+          <p className="text-sm text-muted-foreground mb-12">What people say about working with me.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -57,7 +57,7 @@ const TestimonialsSection = () => {
               </p>
               <div className="mt-auto">
                 <p className="font-display font-bold text-foreground text-sm">{t.name}</p>
-                <p className="font-mono text-xs text-muted-foreground">{t.role}</p>
+                <p className="text-xs text-muted-foreground">{t.role}</p>
               </div>
             </TiltCard>
           ))}

@@ -88,10 +88,10 @@ const Header = () => {
           <img src="https://i.postimg.cc/024RWhmB/icon.png" alt="Logo" className="w-8 h-8 rounded" />
         </a>
 
-        {/* Status LED + Live Clock - visible on all screens */}
-        <div className="flex flex-1 mx-2 items-center gap-1.5 md:gap-2 font-mono text-[8px] sm:text-[10px] xl:text-xs text-muted-foreground truncate max-w-[150px] sm:max-w-xs md:max-w-[400px]">
+        {/* Live Clock - visible on all screens */}
+        <div className="flex flex-1 mx-2 items-center gap-1.5 md:gap-2 text-[8px] sm:text-[10px] xl:text-xs text-muted-foreground truncate max-w-[150px] sm:max-w-xs md:max-w-[400px]">
           <span className="w-1.5 h-1.5 md:w-2 md:h-2 shrink-0 rounded-full bg-primary animate-led-blink shadow-[0_0_6px_hsl(var(--primary))]" />
-          <span className="truncate">STATUS: ONLINE // LOC: DHAKA, BD // LIVE: {clock}</span>
+          <span className="truncate">Dhaka, Bangladesh • {clock}</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-6">

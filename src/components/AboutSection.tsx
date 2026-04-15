@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Download } from "lucide-react";
-import TiltCard from "@/components/ui/tilt-card";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -22,7 +21,7 @@ const AboutSection = () => {
           </h2>
           <p className="font-medium text-xs text-muted-foreground mb-8">A bit about my journey</p>
 
-          <TiltCard className="bento-item max-w-3xl">
+          <div className="bento-item max-w-3xl">
             {/* About Highlights */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="p-3 rounded-lg bg-secondary/50">
@@ -53,7 +52,7 @@ const AboutSection = () => {
                 Download CV
               </a>
             </div>
-          </TiltCard>
+          </div>
         </motion.div>
       </div>
     </section>

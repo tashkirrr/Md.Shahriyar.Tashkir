@@ -109,7 +109,7 @@ const ToolkitSection = () => {
           <h2 className="heading-display text-3xl sm:text-4xl text-foreground mb-2">
             <span className="text-gradient">Toolkit</span>
           </h2>
-          <p className="font-mono text-xs text-muted-foreground mb-12">// skills.list()</p>
+          <p className="text-sm text-muted-foreground mb-12">Technologies and tools I work with.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -123,9 +123,7 @@ const ToolkitSection = () => {
               className="bento-item"
             >
               <div className="flex items-center gap-2 mb-4">
-                <span className="font-mono text-xs text-muted-foreground">{cat.module}</span>
-                <span className="text-muted-foreground/30">|</span>
-                <h3 className="font-mono text-primary text-sm font-semibold">{cat.label}</h3>
+                <h3 className="text-primary text-sm font-semibold">{cat.label}</h3>
               </div>
               <div className="flex flex-wrap gap-2 select-none">
                 {cat.skills.map((skill) => (
@@ -135,7 +133,7 @@ const ToolkitSection = () => {
                         e.stopPropagation();
                         setActive(active === skill.name ? null : skill.name);
                       }}
-                      className={`px-3 py-1.5 rounded-md text-sm font-mono transition-all min-h-[44px] min-w-[44px] flex items-center justify-center select-none ${
+                      className={`px-3 py-1.5 rounded-md text-sm transition-all min-h-[44px] min-w-[44px] flex items-center justify-center select-none ${
                         active === skill.name
                           ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
                           : "bg-secondary text-secondary-foreground hover:bg-primary/10 hover:text-primary"
@@ -152,7 +150,7 @@ const ToolkitSection = () => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 5, scale: 0.95 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-card border border-border text-xs font-mono text-primary whitespace-nowrap shadow-xl"
+                          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-card border border-border text-xs text-primary whitespace-nowrap shadow-xl"
                         >
                           {skill.level}
                           <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-card border-r border-b border-border rotate-45 -mt-1" />

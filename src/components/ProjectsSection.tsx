@@ -2,7 +2,6 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState, useCallback } from "react";
 import { Code2, Star, GitFork, ExternalLink, Palette, ArrowRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import TiltCard from "@/components/ui/tilt-card";
 
 interface GitHubRepo {
   id: number;
@@ -34,17 +33,30 @@ const ProjectsSection = () => {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchRepos = useCallback(() => {
+  const fetchRepos = useCallback(async () => {
     setLoading(true);
-    fetch("https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=6")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setRepos(data);
-        }
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
+    
+    try {
+      const response = await fetch(
+        "https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=6",
+        { signal: controller.signal }
+      );
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      
+      if (Array.isArray(data)) {
+        setRepos(data);
+      }
+    } catch (error) {
+      console.error("GitHub API Error:", error);
+      setRepos([]); // Show empty state on error
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -79,12 +91,11 @@ const ProjectsSection = () => {
           </div>
         </motion.div>
 
-        <TiltCard
-          as="a"
+        <a
           href="https://drive.google.com/drive/folders/19dQKjjD0GSYWCXmZmXmmL5MftLMdJJL0?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
-          className="bento-item group cursor-pointer block mb-6 border-primary/20 hover:border-primary/40 transition-all origin-center hover:scale-[1.01] shadow-xl hover:shadow-primary/5"
+          className="bento-item group cursor-pointer block mb-6 border-primary/20 hover:border-primary/40 transition-all hover:shadow-xl hover:shadow-primary/5"
         >
           <div className="flex items-center justify-between mb-3">
             <span className="font-medium text-xs text-primary bg-primary/10 px-2 py-0.5 rounded">Pinned / Design</span>
@@ -99,7 +110,7 @@ const ProjectsSection = () => {
               <p className="text-muted-foreground text-sm mt-1">4+ years of professional design work — branding, UI/UX, marketing collateral.</p>
             </div>
           </div>
-        </TiltCard>
+        </a>
 
         {/* Repos Grid */}
         <div className="relative">
@@ -123,8 +134,7 @@ const ProjectsSection = () => {
                 : repos.map((repo, i) => {
                   const isLastOnPage = i === repos.length - 1;
                   return (
-                    <TiltCard
-                      as="a"
+                    <motion.a
                       key={repo.id}
                       href={repo.html_url}
                       target="_blank"
@@ -176,7 +186,7 @@ const ProjectsSection = () => {
                           </div>
                         </div>
                       )}
-                    </TiltCard>
+                    </motion.a>
                   );
                 })}
             </motion.div>

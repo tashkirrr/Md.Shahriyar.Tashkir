@@ -10,58 +10,34 @@ const socials = [
   { icon: Instagram, href: "https://instagram.com/tashkirrr", label: "Instagram" },
 ];
 
-const logMessages = [
-  "[SYSTEM] Fetching GitHub commits... SUCCESS",
-  "[API] Medium feed synced // 3 articles loaded",
-  "[SYSTEM] Lanyard WebSocket heartbeat... OK",
-  "[USER] Session active from Dhaka, BD",
-  "[SYSTEM] Portfolio engine V23.0 running",
-  "[API] EmailJS service connected // ready",
-  "[SYSTEM] GLOBAL_NAV_PERSISTENCE_ACTIVE | ALL_NODES_SYNCED_V23.0",
-  "[SYSTEM] CV_STATIC_ROUTING_ACTIVE",
-  "[SYSTEM] REPOSITORY_SYNC_COMPLETE",
+const quotes = [
+  "Code is like humor. When you have to explain it, it's bad.",
+  "Simplicity is the soul of efficiency.",
+  "First, solve the problem. Then, write the code.",
+  "Make it work, make it right, make it fast.",
+  "The best code is no code at all.",
+  "Debugging is like being a detective in a crime movie.",
 ];
 
 const Footer = () => {
-  const [logIndex, setLogIndex] = useState(0);
-  const [uptime, setUptime] = useState("00:00:00");
+  const [quoteIndex, setQuoteIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLogIndex((i) => (i + 1) % logMessages.length);
-    }, 3000);
+      setQuoteIndex((i) => (i + 1) % quotes.length);
+    }, 5000);
     return () => clearInterval(interval);
-  }, []);
-
-  // Session uptime
-  useEffect(() => {
-    const start = Date.now();
-    const tick = () => {
-      const elapsed = Math.floor((Date.now() - start) / 1000);
-      const h = String(Math.floor(elapsed / 3600)).padStart(2, "0");
-      const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0");
-      const s = String(elapsed % 60).padStart(2, "0");
-      setUptime(`${h}:${m}:${s}`);
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
   }, []);
 
   return (
     <footer className="relative z-10 border-t border-border py-12">
       <div className="section-container text-center space-y-6">
-        {/* System Log Ticker */}
-        <div className="overflow-hidden h-5 flex items-center">
-          <p className="font-mono text-xs text-primary/40 animate-marquee whitespace-nowrap">
-            {logMessages[logIndex]}
+        {/* Quote Ticker */}
+        <div className="overflow-hidden h-5 flex items-center justify-center">
+          <p className="text-xs text-primary/60 italic animate-marquee whitespace-nowrap">
+            "{quotes[quoteIndex]}"
           </p>
         </div>
-
-        {/* Session Uptime */}
-        <p className="font-mono text-xs text-muted-foreground/50">
-          SESSION_UPTIME: {uptime}
-        </p>
 
         <div className="flex justify-center gap-4 flex-wrap">
           {socials.map((s) => (

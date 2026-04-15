@@ -183,18 +183,31 @@ const DiscordCard = () => {
 
 const SpotifyWebSocketCard = () => {
   const [data, setData] = useState<LanyardData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let ws: WebSocket | null = null;
     let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
+    let restTimeout: ReturnType<typeof setTimeout> | null = null;
 
+    // Fast REST API fetch with 1s timeout for initial load
     const fetchInitial = async () => {
+      const controller = new AbortController();
+      restTimeout = setTimeout(() => controller.abort(), 1000); // 1s timeout for Discord/Music
+      
       try {
-        const r = await fetch("https://api.lanyard.rest/v1/users/865610520366940200");
+        const r = await fetch("https://api.lanyard.rest/v1/users/865610520366940200", {
+          signal: controller.signal
+        });
+        clearTimeout(restTimeout);
+        
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const json = await r.json();
         if (json.success) setData(json.data);
       } catch (e) {
-        console.error("Lanyard REST Fallback Error:", e);
+        console.error("Lanyard REST Error:", e);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -219,21 +232,23 @@ const SpotifyWebSocketCard = () => {
         // Opcode 0: Event Update
         if (msg.op === 0 && (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE")) {
           setData(msg.d);
+          setIsLoading(false);
         }
       };
 
       ws.onclose = () => {
         if (heartbeatInterval) clearInterval(heartbeatInterval);
-        setTimeout(connect, 3000); // Reconnect faster (3s)
+        setTimeout(connect, 3000); // Reconnect after 3s
       };
 
       ws.onerror = () => ws?.close();
     };
 
-    fetchInitial();
-    connect();
+    fetchInitial(); // Fast 1s fetch first
+    connect(); // Then WebSocket for real-time updates
 
     return () => {
+      if (restTimeout) clearTimeout(restTimeout);
       if (heartbeatInterval) clearInterval(heartbeatInterval);
       ws?.close();
     };
@@ -245,7 +260,12 @@ const SpotifyWebSocketCard = () => {
   return (
     <TiltCard as="div" className="bento-item flex flex-col justify-center flex-1 min-h-[160px] overflow-hidden">
       <div className="flex items-center gap-3 h-full">
-        {isPlaying && spotify && (
+        {isLoading ? (
+          <div className="flex items-center gap-3 text-muted-foreground">
+            <Music size={20} className="text-primary/50 animate-pulse" />
+            <span className="text-sm">Loading Spotify status...</span>
+          </div>
+        ) : isPlaying && spotify ? (
           <>
             <div className="relative shrink-0">
               <img
@@ -256,11 +276,16 @@ const SpotifyWebSocketCard = () => {
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-led-blink shadow-[0_0_8px_hsl(var(--primary))]" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-mono text-xs text-primary mb-1">Now Playing</p>
+              <p className="text-xs text-primary mb-1 font-medium">Now Playing</p>
               <p className="text-foreground text-sm font-semibold truncate">{spotify.song}</p>
               <p className="text-muted-foreground text-xs truncate">{spotify.artist}</p>
             </div>
           </>
+        ) : (
+          <div className="flex items-center gap-3 text-muted-foreground">
+            <Music size={20} className="text-primary/50" />
+            <span className="text-sm">Not listening to anything right now</span>
+          </div>
         )}
       </div>
     </TiltCard>

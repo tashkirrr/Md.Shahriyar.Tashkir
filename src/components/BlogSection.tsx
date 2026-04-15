@@ -19,14 +19,22 @@ const BlogSection = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [lastSynced, setLastSynced] = useState<string>("INITIALIZING...");
+  const [lastSynced, setLastSynced] = useState<string>("Loading...");
 
   const fetchPosts = useCallback(async () => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
+    
     try {
       const res = await fetch(
-        "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@tashkir2006"
+        "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@tashkir2006",
+        { signal: controller.signal }
       );
+      clearTimeout(timeoutId);
+      
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
+      
       if (data.status === "ok" && data.items) {
         const mapped: MediumPost[] = data.items.map((item: Record<string, unknown>) => {
           const title = String(item.title ?? "");
@@ -53,6 +61,7 @@ const BlogSection = () => {
       }
     } catch (err) {
       console.error("Failed to fetch Medium posts:", err);
+      setPosts([]); // Show empty state on error
     } finally {
       setLoading(false);
     }
@@ -85,10 +94,8 @@ const BlogSection = () => {
               <h2 className="heading-display text-3xl sm:text-4xl text-foreground mb-2">
                 Latest <span className="text-gradient">Articles</span>
               </h2>
-              <p className="font-mono text-[10px] sm:text-xs text-muted-foreground flex items-center gap-2">
-                <span className="text-primary">{"> "}</span>
-                showing: [PAGE_{page + 1}/{totalPages}] | sync: [{lastSynced}]
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-led-blink shadow-[0_0_8px_hsl(var(--primary))]" />
+              <p className="text-xs text-muted-foreground flex items-center gap-2">
+                Page {page + 1} of {totalPages} • Last updated: {lastSynced}
               </p>
             </div>
           </div>
@@ -135,9 +142,9 @@ const BlogSection = () => {
                 </div>
                 <p className="text-muted-foreground text-xs mb-3 line-clamp-2">{post.description}</p>
                 <div className="flex items-center justify-between mt-auto pt-2">
-                  <p className="font-mono text-xs text-primary/60">{post.pubDate}</p>
-                  <span className="inline-flex items-center gap-1 text-xs font-mono text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    Expand <ArrowRight size={12} />
+                  <p className="text-xs text-primary/60">{post.pubDate}</p>
+                  <span className="inline-flex items-center gap-1 text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    Read more <ArrowRight size={12} />
                   </span>
                 </div>
 
@@ -207,7 +214,7 @@ const BlogSection = () => {
                   <button
                     key={i}
                     onClick={() => setPage(i)}
-                    className={`px-4 py-2 rounded-lg text-sm font-mono transition-all relative overflow-hidden ${
+                    className={`px-4 py-2 rounded-lg text-sm transition-all relative overflow-hidden ${
                       page === i
                         ? "text-primary-foreground font-bold shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
                         : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
