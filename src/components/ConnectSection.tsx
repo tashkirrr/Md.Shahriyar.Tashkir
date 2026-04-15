@@ -133,7 +133,7 @@ const DiscordCard = () => {
   };
 
   return (
-    <TiltCard as="div" className="bento-item flex items-center gap-4 flex-1 min-h-[48px] relative group overflow-hidden">
+    <div className="bento-item flex items-center gap-4 flex-1 min-h-[48px] relative group overflow-hidden">
       <MessageCircle size={20} className="text-primary shrink-0" />
       <span className="text-foreground text-sm font-semibold flex-1">Discord</span>
       
@@ -168,13 +168,13 @@ const DiscordCard = () => {
             exit={{ opacity: 0, scale: 0.95 }} 
             className="absolute inset-0 bg-card/90 backdrop-blur-sm flex items-center justify-center rounded-xl z-10 border border-primary/20"
           >
-            <p className="text-sm font-semibold text-primary font-mono tracking-wide">
+            <p className="text-sm font-semibold text-primary tracking-wide">
               ID Copied!
             </p>
           </motion.div>
         )}
       </AnimatePresence>
-    </TiltCard>
+    </div>
   );
 };
 
@@ -255,7 +255,7 @@ const SpotifyWebSocketCard = () => {
   const spotify = data?.spotify;
 
   return (
-    <TiltCard as="div" className="bento-item flex flex-col justify-center flex-1 min-h-[160px] overflow-hidden">
+    <div className="bento-item flex flex-col justify-center flex-1 min-h-[160px] overflow-hidden">
       <div className="flex items-center gap-3 h-full">
         {isLoading ? (
           <div className="flex items-center gap-3 text-muted-foreground">
@@ -285,7 +285,7 @@ const SpotifyWebSocketCard = () => {
           </div>
         )}
       </div>
-    </TiltCard>
+    </div>
   );
 };
 
@@ -300,8 +300,7 @@ const ResumeCard = () => {
   };
 
   return (
-    <TiltCard
-      as="div"
+    <div
       className="bento-item flex flex-col justify-center cursor-pointer group flex-1 min-h-[48px]"
       onClick={handleClick}
     >
@@ -316,7 +315,7 @@ const ResumeCard = () => {
           </p>
         </div>
       </div>
-    </TiltCard>
+    </div>
   );
 };
 
