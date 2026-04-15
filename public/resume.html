@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Shahriyar Tashkir - Professional Resume</title>
+    <style>
+        :root {
+            --primary-dark: #0f172a; 
+            --accent-blue: #38bdf8; 
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
+            --sidebar-bg: #1e293b;
+        }
+
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #cbd5e1;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .resume-wrapper {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+
+        /* --- Header Section --- */
+        .header-section {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--accent-blue);
+        }
+
+        .header-text { flex: 1; }
+        .header-text h1 {
+            font-size: 26px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 10.5px;
+            color: var(--accent-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 5px 0 12px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px 15px;
+            font-size: 9.5px;
+        }
+
+        .contact-grid a { color: #cbd5e1; text-decoration: none; }
+
+        /* --- Body Layout --- */
+        .content-body {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 32%;
+            background-color: var(--sidebar-bg);
+            color: white;
+            padding: 20px 25px;
+        }
+
+        .sidebar h3 {
+            color: var(--accent-blue);
+            border-bottom: 1px solid #334155;
+            padding-bottom: 4px;
+            margin: 18px 0 10px 0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar h3:first-child { margin-top: 0; }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0; margin: 0;
+            font-size: 10px;
+        }
+
+        .sidebar-list li { margin-bottom: 8px; line-height: 1.4; }
+
+        .skill-category {
+            color: var(--accent-blue);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            font-size: 8.5px;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            width: 68%;
+            padding: 25px 35px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            color: var(--primary-dark);
+            font-weight: 800;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 4px;
+            margin: 18px 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .section-title:first-child { margin-top: 0; }
+
+        .profile-text {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .item { margin-bottom: 12px; }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .item-title { font-weight: 700; font-size: 11px; color: var(--primary-dark); }
+        .item-date { font-size: 9px; color: var(--text-muted); font-weight: 600; }
+        .item-subtitle { font-style: italic; font-size: 9.5px; color: var(--accent-blue); font-weight: 600; display: block; margin: 1px 0; }
+        .item-desc { font-size: 10px; color: var(--text-muted); margin: 3px 0 0 0; }
+
+        @media print {
+            body { background: none; margin: 0; }
+            .resume-wrapper { margin: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-wrapper">
+    <header class="header-section">
+        <img src="https://i.postimg.cc/0Qj1v11m/Tashkir.jpg" alt="Mohammad Shahriyar Tashkir" class="profile-pic">
+        <div class="header-text">
+            <h1>Mohammad Shahriyar Tashkir</h1>
+            <div class="header-subtitle">Visual Identity • Graphic Designer • Technical Logic • Computer Science and Engineering</div>
+            <div class="contact-grid">
+                <span>📍 Dhaka, Bangladesh</span>
+                <span>📞 +880 1769-202860</span>
+                <span>✉️ <a href="mailto:shahriyar.tashkir@gmail.com">shahriyar.tashkir@gmail.com</a></span>
+                <span>🌐 <a href="https://tashkir1.netlify.app/" target="_blank">tashkir1.netlify.app</a></span>
+                <span>🔗 <a href="https://linkedin.com/in/tashkirrr" target="_blank">linkedin/in/tashkirrr</a></span>
+                <span>💻 <a href="https://github.com/tashkirrr" target="_blank">github.com/tashkirrr</a></span>
+                <span>👤 <a href="https://facebook.com/shahriyar.tashkir/" target="_blank">fb.com/shahriyar.tashkir</a></span>
+                <span>✍️ <a href="https://medium.com/@tashkir2006" target="_blank">medium/@tashkir2006</a></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-body">
+        <aside class="sidebar">
+            <h3>Technical Toolkit</h3>
+            <ul class="sidebar-list">
+                <li><span class="skill-category">Visual Design</span> Mastered Figma, Photoshop, Illustrator, Affinity Designer, and Canva for high-end visual content.</li>
+                <li><span class="skill-category">Web Stack</span> Proficient in TypeScript, React, Next.js, Tailwind CSS, Node.js, NestJS, and FastAPI.</li>
+                <li><span class="skill-category">CS Foundations</span> Solid grasp of C/C++, Java, Python, SQL, Data Structures, Algorithms, OOP, and OS.</li>
+                <li><span class="skill-category">DevOps & Cloud</span> Experience with PostgreSQL, MongoDB, Prisma ORM, Docker, Vercel, and AWS.</li>
+                <li><span class="skill-category">Systems</span> Expertise in Linux Ricing, Bash scripting, Git version control, and System Design.</li>
+            </ul>
+
+            <h3>Achievements</h3>
+            <ul class="sidebar-list">
+                <li><strong>Champion</strong> - Graphics Design Competition, ACC IT Club (2024).</li>
+                <li><strong>Divisional Champion</strong> - ICT Olympiad Bangladesh (2022).</li>
+                <li><strong>Institutional Ambassador</strong> - ACPS Tech Representative and mentor.</li>
+            </ul>
+
+            <h3>Interests</h3>
+            <ul class="sidebar-list">
+                <li>• Minimalist UI Architecture</li>
+                <li>• CI/CD Workflow Automation</li>
+                <li>• Open Source Contributions</li>
+                <li>• Climate Informatics</li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section class="section">
+                <div class="section-title">Professional Summary</div>
+                <p class="profile-text">
+                    Strategic creator and problem-solver currently pursuing a B.Sc. in Computer Science & Engineering at Daffodil International University. Specializing in bridging the gap between complex technical logic and minimalist visual experiences. Proven leadership in tech-focused student organizations and climate advocacy.
+                </p>
+            </section>
+
+            <section class="section">
+                <div class="section-title">Professional Experience</div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Secretary of Graphics</span><span class="item-date">Present</span></div>
+                    <div class="item-subtitle">United Youth Forum of Science and Research</div>
+                    <p class="item-desc">Developing data-driven visual content and scientific publication graphics for research dissemination and international scientific communication.</p>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Director of IT and Graphics</span><span class="item-date">Present</span></div>
+                    <div class="item-subtitle">Youth for a Green Earth (YGE)</div>
+                    <p class="item-desc">Leading global digital infrastructure and overseeing visual narratives for climate advocacy, including high-impact COP 29 awareness campaigns.</p>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">General Secretary</span><span class="item-date">2022 – 2023</span></div>
+                    <div class="item-subtitle">ACPS IT Club (ACPSITC)</div>
+                    <p class="item-desc">Directed branding and operational strategy for major regional IT festivals; managed a community of 500+ active student members.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-title">Writing & Open Source</div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Tech Columnist | Medium</span></div>
+                    <p class="item-desc">Authoring technical insights on software sustainability, minimalist system configurations, and the future of climate informatics.</p>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Personal Projects & Contributions | GitHub</span></div>
+                    <p class="item-desc">Maintaining "Program-Your-Code" and various Linux ricing repositories aimed at optimizing developer workflows and UI aesthetics.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-title">Education</div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">B.Sc. in Computer Science & Engineering</span><span class="item-date">In Progress</span></div>
+                    <div class="item-subtitle">Daffodil International University</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Higher Secondary Certificate (HSC)</span><span class="item-date">2023</span></div>
+                    <div class="item-subtitle">Adamjee Cantonment College | Science Group | GPA: 4.50</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">Secondary School Certificate (SSC)</span><span class="item-date">2021</span></div>
+                    <div class="item-subtitle">Adamjee Cantonment Public School | Science Group | GPA: 5.00</div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+</body>
+</html>
