@@ -131,9 +131,7 @@ const ProjectsSection = () => {
                       <Skeleton className="h-3 w-1/2" />
                     </div>
                   ))
-                : repos.map((repo, i) => {
-                  const isLastOnPage = i === repos.length - 1;
-                  return (
+                : repos.map((repo) => (
                     <motion.a
                       key={repo.id}
                       href={repo.html_url}
@@ -177,18 +175,15 @@ const ProjectsSection = () => {
                         </span>
                       </div>
 
-                      {/* "See More" Hover Trigger for last card */}
-                      {isLastOnPage && (
-                        <div className="absolute inset-0 bg-primary/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                          <div className="bg-background/90 border border-primary/30 px-3 py-1.5 rounded-full flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                            <span className="text-[10px] font-medium text-primary font-bold">See More</span>
-                            <ArrowRight size={14} className="text-primary" />
-                          </div>
+                      {/* "See More" Hover Overlay */}
+                      <div className="absolute inset-0 bg-primary/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                        <div className="bg-background/90 border border-primary/30 px-3 py-1.5 rounded-full flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                          <span className="text-[10px] font-medium text-primary font-bold">See More</span>
+                          <ArrowRight size={14} className="text-primary" />
                         </div>
-                      )}
+                      </div>
                     </motion.a>
-                  );
-                })}
+                  ))}
             </motion.div>
           </AnimatePresence>
         </div>
