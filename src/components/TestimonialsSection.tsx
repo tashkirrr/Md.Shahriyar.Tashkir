@@ -26,7 +26,7 @@ const TestimonialsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-24">
+    <section id="testimonials" className="py-24">
       <div className="section-container">
         <motion.div
           ref={ref}
