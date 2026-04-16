@@ -22,22 +22,6 @@ const AboutSection = () => {
           <p className="font-medium text-xs text-muted-foreground mb-8">A bit about my journey</p>
 
           <div className="bento-item max-w-3xl">
-            {/* About Highlights */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="p-3 rounded-lg bg-secondary/50">
-                <p className="font-medium text-xs text-primary mb-1">Visual Designer</p>
-                <p className="text-foreground/85 text-sm">4+ years in branding/UI (Adobe/Affinity)</p>
-              </div>
-              <div className="p-3 rounded-lg bg-secondary/50">
-                <p className="font-medium text-xs text-primary mb-1">CS Student</p>
-                <p className="text-foreground/85 text-sm">B.Sc. in CSE @ DIU</p>
-              </div>
-              <div className="p-3 rounded-lg bg-secondary/50">
-                <p className="font-medium text-xs text-primary mb-1">Climate Advocate</p>
-                <p className="text-foreground/85 text-sm">Youth for Green Earth (COP 29)</p>
-              </div>
-            </div>
-
             <p className="text-foreground/85 leading-relaxed">
               Starting from Adamjee Cantonment Public School as IT Club General Secretary to 4+ years as a professional Graphic Designer (Adobe/Affinity Suite). Science graduate from Adamjee Cantonment College (SSC 5.00, HSC 4.50). Currently focusing all energy on B.Sc. in Computer Science at DIU while staying active in climate advocacy with UYFSR and Youth for a Green Earth.
             </p>
