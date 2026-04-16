@@ -32,7 +32,8 @@ const NeuralBackground = () => {
     };
     window.addEventListener("mousemove", handleMouse);
 
-    const count = Math.min(60, Math.floor((window.innerWidth * window.innerHeight) / 20000));
+    // Reduced node count for low-end devices (was 60)
+    const count = Math.min(25, Math.floor((window.innerWidth * window.innerHeight) / 40000));
     nodesRef.current = Array.from({ length: count }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -44,7 +45,7 @@ const NeuralBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const nodes = nodesRef.current;
-      const maxDist = 150;
+      const maxDist = 100; // Reduced connection distance
       const mouse = mouseRef.current;
 
       for (const node of nodes) {
@@ -57,8 +58,9 @@ const NeuralBackground = () => {
         const mdx = node.x - mouse.x;
         const mdy = node.y - mouse.y;
         const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mDist < 120 && mDist > 0) {
-          const force = (120 - mDist) / 120 * 0.5;
+        // Simplified mouse interaction for performance
+        if (mDist < 80 && mDist > 0) {
+          const force = (80 - mDist) / 80 * 0.3;
           node.x += (mdx / mDist) * force;
           node.y += (mdy / mDist) * force;
         }

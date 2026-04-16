@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 
 const navItems = [
@@ -140,15 +139,11 @@ const Header = () => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden glass-card border-t mx-4 mb-4 rounded-xl p-4"
-            style={{ zIndex: 100 }}
-          >
+      {isOpen && (
+        <nav
+          className="md:hidden glass-card border-t mx-4 mb-4 rounded-xl p-4 animate-in fade-in slide-in-from-top-2"
+          style={{ zIndex: 100 }}
+        >
             {navItems.map((item) => {
               const isActive = activeSection === item.href.slice(1);
               return (
@@ -164,9 +159,8 @@ const Header = () => {
                 </a>
               );
             })}
-          </motion.nav>
-        )}
-      </AnimatePresence>
+        </nav>
+      )}
     </header>
   );
 };
