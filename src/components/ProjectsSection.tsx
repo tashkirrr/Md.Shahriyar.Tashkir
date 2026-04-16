@@ -36,7 +36,7 @@ const ProjectsSection = () => {
   const fetchRepos = useCallback(async () => {
     setLoading(true);
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1000); // 1s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout for GitHub API
     
     try {
       const response = await fetch(
@@ -53,7 +53,8 @@ const ProjectsSection = () => {
       }
     } catch (error) {
       console.error("GitHub API Error:", error);
-      setRepos([]); // Show empty state on error
+      // Keep loading state false but don't clear repos if we have cached data
+      // This prevents flickering on slow connections
     } finally {
       setLoading(false);
     }
