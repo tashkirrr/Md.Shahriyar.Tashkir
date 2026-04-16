@@ -1,34 +1,32 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import TiltCard from "@/components/ui/tilt-card";
 
 type SkillTag = {
   name: string;
   level: "Core Competency" | "Current Focus" | "Proficient";
 };
 
-const categories: { label: string; module: string; skills: SkillTag[] }[] = [
+const categories: { label: string; skills: SkillTag[] }[] = [
   {
     label: "Core",
-    module: "Module 1",
     skills: [
       { name: "C", level: "Core Competency" },
-      { name: "C++", level: "Core Competency" },
-      { name: "Java", level: "Core Competency" },
-      { name: "Python", level: "Current Focus" },
-      { name: "SQL", level: "Proficient" },
-      { name: "DSA", level: "Current Focus" },
-      { name: "Algorithms", level: "Core Competency" },
+      { name: "Python", level: "Core Competency" },
+      { name: "SQL", level: "Core Competency" },
+      { name: "Algorithm", level: "Core Competency" },
       { name: "OOP", level: "Core Competency" },
-      { name: "Discrete Math", level: "Proficient" },
-      { name: "DBMS", level: "Proficient" },
-      { name: "OS", level: "Proficient" },
-      { name: "Computer Architecture", level: "Proficient" },
+    ],
+  },
+  {
+    label: "Engineering & Systems",
+    skills: [
+      { name: "Linux (Mint)", level: "Core Competency" },
+      { name: "Git", level: "Core Competency" },
+      { name: "System Design", level: "Current Focus" },
     ],
   },
   {
     label: "Web & Technical Development",
-    module: "Module 2",
     skills: [
       { name: "TypeScript", level: "Current Focus" },
       { name: "JavaScript (ES6+)", level: "Core Competency" },
@@ -37,51 +35,20 @@ const categories: { label: string; module: string; skills: SkillTag[] }[] = [
       { name: "HTML5", level: "Core Competency" },
       { name: "CSS3", level: "Core Competency" },
       { name: "Tailwind CSS", level: "Core Competency" },
-      { name: "Shadcn/ui", level: "Proficient" },
       { name: "Node.js", level: "Current Focus" },
-      { name: "Express", level: "Proficient" },
-      { name: "NestJS", level: "Proficient" },
       { name: "FastAPI", level: "Proficient" },
-      { name: "PostgreSQL", level: "Proficient" },
       { name: "MongoDB", level: "Proficient" },
-      { name: "Prisma", level: "Proficient" },
-      { name: "REST APIs", level: "Core Competency" },
-      { name: "Docker", level: "Proficient" },
-      { name: "Vercel", level: "Proficient" },
-      { name: "AWS", level: "Proficient" },
-    ],
-  },
-  {
-    label: "Engineering & Systems",
-    module: "Module 3",
-    skills: [
-      { name: "Linux (Ricing)", level: "Core Competency" },
-      { name: "Bash Scripting", level: "Core Competency" },
-      { name: "Git", level: "Core Competency" },
-      { name: "GitHub", level: "Core Competency" },
-      { name: "System Design", level: "Current Focus" },
-      { name: "Networking", level: "Proficient" },
-      { name: "Assembly", level: "Proficient" },
-      { name: "Cloud Computing", level: "Current Focus" },
-      { name: "Registry Optimization", level: "Proficient" },
-      { name: "Performance Tuning", level: "Proficient" },
+      { name: "NestJS", level: "Proficient" },
     ],
   },
   {
     label: "Visual & Design Engineering",
-    module: "Module 4",
     skills: [
-      { name: "UI/UX Design", level: "Core Competency" },
-      { name: "Figma", level: "Core Competency" },
+      { name: "Affinity", level: "Core Competency" },
+      { name: "Canva", level: "Proficient" },
       { name: "Adobe Photoshop", level: "Core Competency" },
       { name: "Adobe Illustrator", level: "Core Competency" },
-      { name: "Affinity Designer", level: "Core Competency" },
-      { name: "Affinity Photo", level: "Proficient" },
-      { name: "Affinity Publisher", level: "Proficient" },
-      { name: "Canva", level: "Proficient" },
-      { name: "Prototyping", level: "Core Competency" },
       { name: "Responsive Design", level: "Core Competency" },
-      { name: "Technical Storytelling", level: "Proficient" },
     ],
   },
 ];
@@ -114,9 +81,8 @@ const ToolkitSection = () => {
 
         <div className="grid md:grid-cols-2 gap-6">
           {categories.map((cat, ci) => (
-            <TiltCard
+            <motion.div
               key={cat.label}
-              as="div"
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: ci * 0.1 }}
@@ -160,7 +126,7 @@ const ToolkitSection = () => {
                   </div>
                 ))}
               </div>
-            </TiltCard>
+            </motion.div>
           ))}
         </div>
       </div>
