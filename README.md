@@ -1,63 +1,78 @@
-# 🌐 Mohammad Shahriyar Tashkir | Creative Developer Portfolio
+# Mohammad Shahriyar Tashkir — Portfolio
 
-A high-performance, non-linear **Bento-style portfolio** designed to showcase the transition from professional graphic design to **Computer Science & Engineering (CSE)**. Built with a focus on Glassmorphism, interactive neural network backgrounds, and system-level optimization.
+**Live Site:** [tashkirrr.github.io/Md.Shahriyar.Tashkir](https://tashkirrr.github.io/Md.Shahriyar.Tashkir/)
+
+Hi! I'm Shahriyar — a designer turned developer based in Dhaka, Bangladesh. This is my personal portfolio where I showcase my journey from 4+ years of professional graphic design to pursuing Computer Science & Engineering at DIU.
+
+## What You'll Find Here
+
+- **About Me** — My background, from IT Club General Secretary to professional designer to CS student
+- **Featured Projects** — My latest GitHub repositories and design work
+- **Toolkit** — Technologies and tools I work with (C, Python, React, TypeScript, Adobe Suite, and more)
+- **My Journey** — Academic roadmap from ICT Olympiad champion to university
+- **Honors** — Awards, certifications, and recognition
+- **Blog** — Technical articles I write on Medium
+- **Get In Touch** — Ways to connect with me
+
+## Built With
+
+- **React + TypeScript** — For a solid, type-safe foundation
+- **Vite** — Fast development and optimized builds
+- **Tailwind CSS** — Utility-first styling
+- **Framer Motion** — Smooth, subtle animations
+- **GitHub Pages** — Simple, free hosting
+
+## Running Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/tashkirrr/Md.Shahriyar.Tashkir.git
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Deploy to GitHub Pages
+npm run deploy
+```
+
+## Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── ui/             # Reusable UI components
+│   ├── AboutSection.tsx
+│   ├── ProjectsSection.tsx
+│   ├── ToolkitSection.tsx
+│   └── ...
+├── pages/              # Page components
+├── hooks/              # Custom React hooks
+└── lib/                # Utility functions
+```
+
+## Design Philosophy
+
+This portfolio is intentionally **human-scale**:
+
+- Clean, readable code
+- Essential features only — no bloat
+- Smooth but not overwhelming animations
+- Fast loading on all devices
+- Accessible and easy to navigate
+
+## Contact
+
+- **Email:** shahriyar.tashkir@gmail.com
+- **LinkedIn:** [linkedin.com/in/tashkirrr](https://linkedin.com/in/tashkirrr)
+- **GitHub:** [github.com/tashkirrr](https://github.com/tashkirrr)
+- **Medium:** [medium.com/@tashkir2006](https://medium.com/@tashkir2006)
 
 ---
 
-## 🚀 Technical Stack
-
-* **Framework:** Next.js 14 / React
-* **Styling:** Tailwind CSS with Glassmorphism & custom `backdrop-blur`
-* **Animations:** Framer Motion (Magnetic buttons, staggered entry, scroll-triggers)
-* **Infrastructure:** Lovable.dev / Vercel
-* **Backend/API:** EmailJS for serverless contact architecture
-* **Typography:** JetBrains Mono (Terminal-style accents) & Modern Sans-Serif
-
----
-
-## 🛠️ Key Features
-
-### 1. GitHub-Inspired Neural Network
-An interactive, hardware-accelerated background layer consisting of moving nodes and connecting lines, mimicking the GitHub contribution graph aesthetic with a technical twist.
-
-### 2. The Command Center (Section 6)
-A centralized hub for all digital footprints, featuring:
-* **Social Nodes:** Integrated links to LinkedIn, GitHub, X (Twitter), Medium, and Reddit.
-* **Identity Nodes:** Discord User ID and Spotify integration showcasing active lifestyle elements.
-* **Communication Terminal:** A serverless contact form powered by EmailJS.
-
-### 3. Academic Roadmap
-A chronological, responsive timeline documenting a journey from:
-* **ICT Olympiad Bangladesh** Divisional Champion (2022).
-* **General Secretary** of ACPS IT Club.
-* **SSC & HSC** Science Excellence (GPA 5.00 / 4.50).
-* Current enrollment in **B.Sc. in CSE at Daffodil International University (DIU)**.
-
----
-
-## ⚙️ Configuration
-
-To maintain the functionality of the **Command Center** without exposing sensitive credentials, this project utilizes **Environment Variables**. 
-
-To run this locally or deploy it, ensure you have the following keys configured in your `.env.local` or your deployment dashboard (Vercel/Netlify):
-
-* `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
-* `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
-* `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
-
----
-
-## 🔒 Security & UX Guardrails
-
-* **Context Protection:** Right-click and text selection are disabled to protect design assets.
-* **Mobile UX:** Implemented `h-[100dvh]` to prevent mobile browser address bar jitter.
-* **Safe Navigation:** All external anchors utilize `target="_blank" rel="noopener noreferrer"` for security and flow retention.
-
----
-
-## 👨‍💻 Author
-
-**Mohammad Shahriyar Tashkir** *Creative Developer & CSE Student* [GitHub Profile](https://github.com/tashkirrr) | [LinkedIn](https://www.linkedin.com/in/tashkirrr/)
-
----
-*© 2026 Mohammad Shahriyar Tashkir. All rights reserved.*
+Built with care in Dhaka, Bangladesh.
