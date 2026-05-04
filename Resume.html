@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Shahriyar Tashkir - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-gray: #f1f5f9;
+            --white: #ffffff;
+            --accent: #0ea5e9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .resume-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            position: relative;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            z-index: 100;
+        }
+
+        /* Sidebar Styling */
+        .sidebar { border-right: 1px solid #e2e8f0; padding-right: 20px; }
+        .profile-img { width: 100%; border-radius: 12px; margin-bottom: 25px; border: 3px solid #f1f5f9; }
+        
+        .section-title { 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.2px; 
+            color: var(--primary); 
+            margin: 25px 0 12px 0; 
+            font-weight: 700;
+        }
+
+        .contact-link { display: block; font-size: 0.85rem; margin-bottom: 10px; text-decoration: none; color: var(--text-light); }
+        .contact-link:hover { color: var(--primary); }
+        .contact-link strong { color: var(--text-dark); display: block; }
+
+        .tag-container { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { background: #eff6ff; color: var(--primary); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+
+        /* Main Content */
+        header h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 5px; }
+        .job-title { font-size: 1.2rem; color: var(--primary); font-weight: 600; margin-bottom: 20px; }
+        
+        h2 { font-size: 1.2rem; color: var(--text-dark); margin: 30px 0 15px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+
+        .entry { margin-bottom: 20px; }
+        .entry-header { display: flex; justify-content: space-between; align-items: baseline; }
+        .entry-title { font-weight: 700; font-size: 1rem; color: var(--text-dark); }
+        .entry-org { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+        .entry-date { font-size: 0.85rem; color: var(--text-light); }
+        .entry-desc { font-size: 0.88rem; color: var(--text-light); margin-top: 5px; }
+        .entry-desc li { margin-left: 18px; margin-bottom: 3px; }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .resume-container { box-shadow: none; width: 100%; margin: 0; padding: 30px; }
+            .print-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">Download Resume</button>
+
+    <div class="resume-container">
+        <aside class="sidebar">
+            <img src="https://drive.google.com/thumbnail?id=1dEHSMxjfGQSyV8PK0PV_bxoceMRqhkI1&sz=w500" alt="Mohammad Shahriyar Tashkir" class="profile-img">
+            
+            <div class="section-title">Contact</div>
+            <a href="tel:+8801769202860" class="contact-link"><strong>Phone</strong>01769202860</a>
+            <a href="mailto:262-15-236@diu.edu.bd" class="contact-link"><strong>Email</strong>262-15-236@diu.edu.bd</a>
+            <div class="contact-link"><strong>Location</strong>Dhaka Cantonment, Dhaka</div>
+
+            <div class="section-title">Social & Links</div>
+            <a href="https://tashkirrr.github.io/Md.Shahriyar.Tashkir/" class="contact-link" target="_blank"><strong>Portfolio</strong>tashkirrr.github.io/Portfolio</a>
+            <a href="https://www.linkedin.com/in/tashkirrr/" class="contact-link" target="_blank"><strong>LinkedIn</strong>linkedin.com/in/tashkirrr</a>
+            <a href="https://github.com/tashkirrr" class="contact-link" target="_blank"><strong>GitHub</strong>github.com/tashkirrr</a>
+
+            <div class="section-title">Skills</div>
+            <div class="tag-container">
+                <span class="tag">Graphic Design</span><span class="tag">UI/UX Design</span>
+                <span class="tag">Python</span><span class="tag">C</span><span class="tag">TypeScript</span>
+                <span class="tag">JavaScript</span><span class="tag">HTML5/CSS3</span><span class="tag">Leadership</span><span class="tag">Competitive Programming</span><span class="tag">Computer Science</span>
+            </div>
+        </aside>
+
+        <main>
+            <header>
+                <h1>Mohammad Shahriyar Tashkir</h1>
+                <p class="job-title">Graphic Designer & Computer Science Student</p>
+                <p class="entry-desc">Some people choose between being a designer or a developer. I never understood why I had to pick one. 
+I'm Mohammad Shahriyar Tashkir, a Computer Science student at Daffodil International University. I design brands, write about machine learning, and lead digital strategy for a youth environmental organization. 
+Currently, I work as the Director of IT and Graphics at Youth For a Green Earth. I manage everything visual, from event campaigns to social media identity. Previously, I won the Graphics Design Championship at Adamjee Cantonment College's TechCon 2024 and served as the General Secretary of my school's IT Club. 
+On the tech side, I am really interested in the connection between Machine Learning and Cryptography. I focus on how Homomorphic Encryption and Federated Learning can help us create smarter models without using raw data. I share these ideas on Medium because I believe complex topics need clear explanations. 
+In addition to all this, I have represented Bangladesh as a National Ambassador for the ICT Olympiad. I volunteered at the U.S. Embassy’s Mini College Fair and became a Divisional Champion in ICT while I was still in school. 
+I think coding and designing are just different ways to solve problems elegantly.</p>
+            </header>
+
+            <section>
+                <h2>Experience</h2>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">Director of IT & Graphics</span>
+                        <span class="entry-date">Dec 2024 – Present</span>
+                    </div>
+                    <div class="entry-org">Youth For a Green Earth</div>
+                    <ul class="entry-desc">
+                        <li>Co-producing Green Genesis 2026, a major youth competition at BRAC University.</li>
+                        <li>Designed campaigns for COP 29 Climate Demands with Jaago Foundation Trust.</li>
+                        <li>Organized "Nature's Perspective 1.0" and built organization visual identity.</li>
+                    </ul>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">Secretary of Graphics</span>
+                        <span class="entry-date">Sep 2025 – Present</span>
+                    </div>
+                    <div class="entry-org">UYFSR</div>
+                    <p class="entry-desc">Co-organized "National Science Eclipse" and designed official organizational branding.</p>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">Executive Assistant to CEO / General Secretary</span>
+                        <span class="entry-date">Jan 2022 – Jul 2023</span>
+                    </div>
+                    <div class="entry-org">ACPS IT Club (ACPSITC)</div>
+                    <p class="entry-desc">Led technical innovation and digital literacy initiatives for students across the school.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Education</h2>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">B.Sc. in Computer Science</span>
+                        <span class="entry-date">2026 – Present</span>
+                    </div>
+                    <div class="entry-org">Daffodil International University</div>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">HSC, Science Group (GPA 4.50/5.00)</span>
+                        <span class="entry-date">2023 – 2025</span>
+                    </div>
+                    <div class="entry-org">Adamjee Cantonment College</div>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">SSC, Science Group (GPA 5.00/5.00)</span>
+                        <span class="entry-date">2013 – 2023</span>
+                    </div>
+                    <div class="entry-org">Adamjee Cantonment Public School</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Projects</h2>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">Housing Price Prediction (Realteak)</span>
+                        <a href="https://tashkirrr.github.io/housing-price-prediction" class="tag" target="_blank">Live Demo</a>
+                    </div>
+                    <p class="entry-desc">AI-powered web app using ML models to predict property prices based on location and age.</p>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">Interactive Portfolio Website</span>
+                        <a href="https://tashkirrr.github.io/Md.Shahriyar.Tashkir/" class="tag" target="_blank">View Site</a>
+                    </div>
+                    <p class="entry-desc">Developed from scratch using TypeScript to showcase design and development projects.</p>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">Funny Valentine Project</span>
+                        <a href="https://tashkirrr.github.io/Will-You-Be-My-Love-" class="tag" target="_blank">Live Demo</a>
+                    </div>
+                    <p class="entry-desc">Interactive webpage with custom animations and personalized message reveals.</p>
+                </div>
+                <div class="entry">
+                    <div class="entry-header">
+                        <span class="entry-title">AI Tic-Tac-Toe Game</span>
+                        <a href="https://github.com/tashkirrr/tic-tac-toe" class="tag" target="_blank">Source Code</a>
+                    </div>
+                    <p class="entry-desc">Python-based game featuring an AI opponent powered by conditional logic.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Awards & Recognition</h2>
+                <ul class="entry-desc">
+                    <li><strong>Graphics Design Champion</strong> – Intra College TechCon (2024)</li>
+                    <li><strong>Divisional Round Champion</strong> – ICT Olympiad Bangladesh (2022)</li>
+                    <li><strong>National Ambassador</strong> – ICT Olympiad Bangladesh (Season 1)</li>
+                    <li><strong>AI for Bangladesh Summit</strong> – Certificate of Achievement (2025)</li>
+                    <li><strong>The Hour of Code</strong> – Code.org Certificate of Completion (2023)</li>
+                    <li><strong>Campus Ambassador</strong> – Frame The Moment 2.0 (2021)</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
