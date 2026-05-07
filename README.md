@@ -1,78 +1,86 @@
-# Mohammad Shahriyar Tashkir — Portfolio
+# 🌌 Cinematic Cyber Portfolio | Md. Shahriyar Tashkir
 
-**Live Site:** [tashkirrr.github.io/Md.Shahriyar.Tashkir](https://tashkirrr.github.io/Md.Shahriyar.Tashkir/)
+A world-class, high-performance developer portfolio built with a focus on immersive visual storytelling, modular architecture, and advanced security.
 
-Hi! I'm Shahriyar — a designer turned developer based in Dhaka, Bangladesh. This is my personal portfolio where I showcase my journey from 4+ years of professional graphic design to pursuing Computer Science & Engineering at DIU.
+![Portfolio Preview](https://i.postimg.cc/024RWhmB/icon.png)
 
-## What You'll Find Here
+## 💎 Core Experience Features
 
-- **About Me** — My background, from IT Club General Secretary to professional designer to CS student
-- **Featured Projects** — My latest GitHub repositories and design work
-- **Toolkit** — Technologies and tools I work with (C, Python, React, TypeScript, Adobe Suite, and more)
-- **My Journey** — Academic roadmap from ICT Olympiad champion to university
-- **Honors** — Awards, certifications, and recognition
-- **Blog** — Technical articles I write on Medium
-- **Get In Touch** — Ways to connect with me
+### 🎬 Cinematic Visual Engine
+- **Dynamic Starfield**: A high-density, performant background of shimmering stars.
+- **Interactive Mouse Trail**: A fluid, glowing trail that follows the cursor, creating a sense of "life" within the UI.
+- **Glassmorphism UI**: Modern, translucent components with subtle borders and deep shadows.
+- **Framer Motion Animations**: Silky-smooth entry transitions and micro-interactions for every element.
 
-## Built With
+### 🛡️ Security & Content Protection
+- **Anti-Copy Suite**: Site-wide protection against unauthorized text selection and right-click menus.
+- **Inspector Lockdown**: Global prevention of common keyboard shortcuts (`F12`, `Ctrl+Shift+I`, `Ctrl+U`, etc.) to protect original design work.
+- **SecurityProvider**: A centralized React context that enforces security protocols across all routes.
 
-- **React + TypeScript** — For a solid, type-safe foundation
-- **Vite** — Fast development and optimized builds
-- **Tailwind CSS** — Utility-first styling
-- **Framer Motion** — Smooth, subtle animations
-- **GitHub Pages** — Simple, free hosting
+### 🔌 Real-Time Integrations
+- **Spotify Live Status**: Real-time "Now Playing" card powered by the Lanyard API and WebSockets.
+- **GitHub Dynamic Grid**: Automatic fetching of public repositories with a localized caching layer (`sessionStorage`) to optimize API rate limits.
+- **Project Detail Modals**: Immersive "Quick View" modals for GitHub projects, providing technical details without leaving the site.
 
-## Running Locally
-
-```bash
-# Clone the repository
-git clone https://github.com/tashkirrr/Md.Shahriyar.Tashkir.git
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Deploy to GitHub Pages
-npm run deploy
-```
-
-## Project Structure
-
-```
-src/
-├── components/          # React components
-│   ├── ui/             # Reusable UI components
-│   ├── AboutSection.tsx
-│   ├── ProjectsSection.tsx
-│   ├── ToolkitSection.tsx
-│   └── ...
-├── pages/              # Page components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions
-```
-
-## Design Philosophy
-
-This portfolio is intentionally **human-scale**:
-
-- Clean, readable code
-- Essential features only — no bloat
-- Smooth but not overwhelming animations
-- Fast loading on all devices
-- Accessible and easy to navigate
-
-## Contact
-
-- **Email:** shahriyar.tashkir@gmail.com
-- **LinkedIn:** [linkedin.com/in/tashkirrr](https://linkedin.com/in/tashkirrr)
-- **GitHub:** [github.com/tashkirrr](https://github.com/tashkirrr)
-- **Medium:** [medium.com/@tashkir2006](https://medium.com/@tashkir2006)
+### 📱 Performance & Accessibility
+- **PWA Ready**: Fully installable as a Progressive Web App on Android and iOS devices.
+- **Responsive Audit**: Hand-tuned layouts for perfect display on everything from an iPhone SE to ultra-wide monitors.
+- **SEO & OpenGraph**: Professional metadata management for stunning link previews on LinkedIn, Twitter, and Discord.
 
 ---
 
-Built with care in Dhaka, Bangladesh.
+## 🛠️ Technical Stack
+
+- **Framework**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/) (TSX)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **API Connectivity**: GitHub REST API & Lanyard (Discord/Spotify)
+- **Routing**: React Router DOM
+
+---
+
+## 📂 Project Architecture
+
+The codebase follows a professional, modular structure for maximum maintainability:
+
+```text
+src/
+├── components/
+│   ├── layout/       # Global structures (Header, Footer, Security, Backgrounds)
+│   ├── sections/     # Homepage blocks (Hero, About, Projects, etc.)
+│   ├── contact/      # Specialized components (ContactForm, SpotifyCard, Discord)
+│   ├── common/       # Utility UI (SEO, ScrollToTop, CommandPalette)
+│   └── ui/           # Primitive shadcn-style components
+├── pages/            # Main route entries (Index, NotFound)
+└── hooks/            # Custom React hooks
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
+```bash
+npm install
+```
+
+### 2. Development
+```bash
+npm run dev
+```
+
+### 3. Build & Deploy
+```bash
+npm run build
+npm run deploy # Deploys to GitHub Pages automatically
+```
+
+---
+
+## 📜 License
+This project is personal intellectual property. The design and security implementations are protected to ensure the uniqueness of the professional brand.
+
+---
+
+**Developed with 💙 by Md. Shahriyar Tashkir**
