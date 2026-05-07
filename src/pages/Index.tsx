@@ -38,30 +38,32 @@ const Section = ({ children, id }: { children: React.ReactNode; id?: string }) =
 
 const Index = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="relative min-h-[100dvh] overflow-x-hidden"
-    >
+    <>
       <GridBackground />
       <FloatingBlobs />
-      <Header />
-      <main className="relative z-10">
-        <HeroSection />
-        <Section><AboutSection /></Section>
-        <Section><RoadmapSection /></Section>
-        <Section><CredentialsSection /></Section>
-        <Section><ProjectsSection /></Section>
-        <Section><ToolkitSection /></Section>
-        <Section><TestimonialsSection /></Section>
-        <Section><BlogSection /></Section>
-        <Section><ConnectSection /></Section>
-      </main>
-      <Footer />
-      <ScrollToTop />
-      <CommandPalette />
-    </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative min-h-[100dvh] overflow-x-hidden"
+      >
+        <Header />
+        <main className="relative z-10">
+          <HeroSection />
+          <Section><AboutSection /></Section>
+          <Section><RoadmapSection /></Section>
+          <Section><CredentialsSection /></Section>
+          <Section><ProjectsSection /></Section>
+          <Section><ToolkitSection /></Section>
+          <Section><TestimonialsSection /></Section>
+          <Section><BlogSection /></Section>
+          <Section><ConnectSection /></Section>
+        </main>
+        <Footer />
+        <ScrollToTop />
+        <CommandPalette />
+      </motion.div>
+    </>
   );
 };
 
