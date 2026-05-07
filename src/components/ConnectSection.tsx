@@ -290,19 +290,12 @@ const SpotifyWebSocketCard = () => {
 };
 
 const ResumeCard = () => {
-  const handleClick = () => {
-    const win = window.open("resume.html", "_blank");
-    if (win) {
-      win.addEventListener("load", () => {
-        win.print();
-      });
-    }
-  };
-
   return (
-    <div
+    <a
+      href="/Md.Shahriyar.Tashkir/Resume.html"
+      target="_blank"
+      rel="noopener noreferrer"
       className="bento-item flex flex-col justify-center cursor-pointer group flex-1 min-h-[48px]"
-      onClick={handleClick}
     >
       <div className="flex items-center gap-3">
         <div className="p-2.5 rounded-lg bg-primary/20 text-primary">
@@ -315,7 +308,7 @@ const ResumeCard = () => {
           </p>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

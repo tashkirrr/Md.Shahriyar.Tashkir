@@ -27,7 +27,7 @@ const AboutSection = () => {
             </p>
             <div className="mt-6">
               <a
-                href="https://drive.google.com/uc?export=download&id=1ZdSN_qd2Tg7R5s_VOpjWocqRGy62ur54"
+                href="/Md.Shahriyar.Tashkir/Resume.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25 min-h-[44px]"
