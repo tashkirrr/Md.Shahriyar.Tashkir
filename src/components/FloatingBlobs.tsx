@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 
 const FloatingBlobs = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-50">
-      {/* Primary Blob - Reduced blur and size */}
+    <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: -1, pointerEvents: "none" }}>
+      <div className="absolute inset-0 overflow-hidden opacity-50">
+        {/* Primary Blob - Reduced blur and size */}
       <motion.div
         animate={{
           x: [0, 40, 0],
@@ -31,6 +32,7 @@ const FloatingBlobs = () => {
         className="absolute top-[30%] -right-[5%] w-[25%] h-[25%] bg-accent/10 rounded-full blur-[70px]"
       />
     </div>
+  </div>
   );
 };
 
