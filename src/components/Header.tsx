@@ -11,7 +11,7 @@ const navItems = [
   { label: "Connect", href: "#contact" },
 ];
 
-const RESUME_URL = "/Md.Shahriyar.Tashkir/resume.html";
+const RESUME_URL = "resume.html";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
