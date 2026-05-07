@@ -1,4 +1,4 @@
-import NeuralBackground from "@/components/NeuralBackground";
+import GridBackground from "@/components/GridBackground";
 import FloatingBlobs from "@/components/FloatingBlobs";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
@@ -44,7 +44,7 @@ const Index = () => {
       transition={{ duration: 1 }}
       className="relative min-h-[100dvh] overflow-x-hidden"
     >
-      <NeuralBackground />
+      <GridBackground />
       <FloatingBlobs />
       <Header />
       <main className="relative z-10">
