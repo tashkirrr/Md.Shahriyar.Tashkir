@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, FileText } from "lucide-react";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -10,6 +10,8 @@ const navItems = [
   { label: "Blog", href: "#blog" },
   { label: "Connect", href: "#contact" },
 ];
+
+const RESUME_URL = "/Md.Shahriyar.Tashkir/Resume.html";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -111,6 +113,14 @@ const Header = () => {
               </a>
             );
           })}
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all hover:scale-105"
+          >
+            <FileText size={14} /> Resume
+          </a>
           <button
             onClick={() => setIsLight(!isLight)}
             className="p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
@@ -159,6 +169,14 @@ const Header = () => {
                 </a>
               );
             })}
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 py-3 px-4 text-primary font-semibold min-h-[44px] hover:text-primary/80 transition-colors"
+          >
+            <FileText size={16} /> Resume
+          </a>
         </nav>
       )}
     </header>

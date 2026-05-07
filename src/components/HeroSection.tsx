@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
+import { Github, FileText } from "lucide-react";
+
+const RESUME_URL = "/Md.Shahriyar.Tashkir/Resume.html";
 
 const HeroSection = () => {
 
@@ -41,6 +43,14 @@ const HeroSection = () => {
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-secondary text-foreground font-semibold text-sm transition-all hover:scale-105 hover:bg-primary/10 min-h-[44px]"
               >
                 <Github size={16} /> View My Work
+              </a>
+              <a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm transition-all hover:scale-105 hover:bg-primary/90 min-h-[44px]"
+              >
+                <FileText size={16} /> View Resume
               </a>
             </div>
 
