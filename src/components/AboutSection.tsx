@@ -33,7 +33,7 @@ const AboutSection = () => {
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25 min-h-[44px]"
               >
                 <Download size={16} />
-                Download CV (v2)
+                Download CV
               </a>
             </div>
           </div>
