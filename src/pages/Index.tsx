@@ -16,12 +16,11 @@ import CommandPalette from "@/components/CommandPalette";
 import { motion } from "framer-motion";
 
 const revealVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 10 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    filter: "blur(0px)",
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    transition: { duration: 0.6, ease: "easeOut" }
   }
 };
 
@@ -41,12 +40,7 @@ const Index = () => {
     <>
       <GridBackground />
       <FloatingBlobs />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative min-h-[100dvh] overflow-x-hidden"
-      >
+      <div className="relative min-h-[100dvh] overflow-x-hidden">
         <Header />
         <main className="relative z-10">
           <HeroSection />
@@ -62,7 +56,7 @@ const Index = () => {
         <Footer />
         <ScrollToTop />
         <CommandPalette />
-      </motion.div>
+      </div>
     </>
   );
 };
