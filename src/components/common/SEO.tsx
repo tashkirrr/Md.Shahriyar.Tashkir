@@ -9,7 +9,7 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "Md. Shahriyar Tashkir | Cyber Portfolio",
+  title = "Md. Shahriyar Tashkir",
   description = "Creative Developer & Technical Designer specializing in building immersive digital experiences. Explore my journey, projects, and technical toolkit.",
   keywords = "Shahriyar Tashkir, Developer Portfolio, React Developer, UI/UX Designer, Cyber Portfolio, Software Engineer Bangladesh",
   image = "https://i.postimg.cc/024RWhmB/icon.png",
