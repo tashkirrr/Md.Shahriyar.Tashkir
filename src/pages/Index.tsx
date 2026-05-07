@@ -40,7 +40,7 @@ const Index = () => {
     <>
       <GridBackground />
       <FloatingBlobs />
-      <div className="relative min-h-[100dvh] overflow-x-hidden">
+      <div className="relative min-h-[100dvh] overflow-x-hidden" style={{ zIndex: 10 }}>
         <Header />
         <main className="relative z-10">
           <HeroSection />

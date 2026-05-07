@@ -182,13 +182,15 @@ const GridBackground = () => {
   }, []);
 
   return (
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: -1, pointerEvents: "none" }}>
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 pointer-events-none"
-        style={{ opacity: 0.9, transform: "translate3d(0,0,0)" }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none"
+      style={{ 
+        opacity: 0.9, 
+        transform: "translate3d(0,0,0)",
+        zIndex: 1 
+      }}
+    />
   );
 };
 
