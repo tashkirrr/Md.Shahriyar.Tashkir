@@ -47,6 +47,8 @@ const GridBackground = () => {
 
     // Mouse trail
     let trail: { x: number; y: number; life: number; size: number }[] = [];
+    // Shooting stars
+    let stars: { x: number; y: number; vx: number; vy: number; length: number; opacity: number }[] = [];
 
     let animationFrameId: number;
     const draw = () => {
