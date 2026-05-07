@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Github, FileText } from "lucide-react";
 
-const RESUME_URL = "/Md.Shahriyar.Tashkir/Resume.html";
+const RESUME_URL = "/Md.Shahriyar.Tashkir/resume.html";
 
 const HeroSection = () => {
 

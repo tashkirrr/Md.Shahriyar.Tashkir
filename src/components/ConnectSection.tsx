@@ -292,7 +292,7 @@ const SpotifyWebSocketCard = () => {
 const ResumeCard = () => {
   return (
     <a
-      href="/Md.Shahriyar.Tashkir/Resume.html"
+      href="/Md.Shahriyar.Tashkir/resume.html"
       target="_blank"
       rel="noopener noreferrer"
       className="bento-item flex flex-col justify-center cursor-pointer group flex-1 min-h-[48px]"
