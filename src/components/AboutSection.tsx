@@ -30,6 +30,7 @@ const AboutSection = () => {
                 <ul className="list-none space-y-1 pl-1">
                   <li>– Computer Science student at Daffodil International University</li>
                   <li>– Director of IT & Graphics at Youth For a Green Earth</li>
+                  <li>– Secretary of Graphics at United Youth Forum of Science and Research (UYFSR).</li>
                 </ul>
               </div>
 
