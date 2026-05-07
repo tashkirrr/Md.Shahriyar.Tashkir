@@ -38,70 +38,70 @@ const RepoModal = ({ repo, onClose }: RepoModalProps) => {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden"
+          className="relative w-full max-w-2xl max-h-[90dvh] bg-card border border-border rounded-2xl shadow-2xl overflow-y-auto custom-scrollbar"
         >
           {/* Header Image / Pattern */}
-          <div className="h-32 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent relative">
+          <div className="h-24 sm:h-32 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent relative shrink-0">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 rounded-full bg-background/50 hover:bg-background text-foreground transition-colors z-10"
             >
               <X size={18} />
             </button>
-            <div className="absolute -bottom-6 left-8 p-4 rounded-xl bg-card border border-border shadow-lg">
-              <Code2 size={32} className="text-primary" />
+            <div className="absolute -bottom-6 left-6 sm:left-8 p-3 sm:p-4 rounded-xl bg-card border border-border shadow-lg">
+              <Code2 size={24} className="text-primary sm:w-8 sm:h-8" />
             </div>
           </div>
 
-          <div className="p-8 pt-10">
+          <div className="p-5 sm:p-8 pt-10">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h3 className="text-2xl font-display font-bold text-foreground">{repo.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground">{repo.name}</h3>
                 {repo.language && (
-                  <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full mt-2 inline-block">
+                  <span className="text-[10px] sm:text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full mt-2 inline-block">
                     {repo.language}
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Star size={16} className="text-yellow-500" />
-                  <span className="text-sm font-semibold">{repo.stargazers_count}</span>
+                  <Star size={14} className="text-yellow-500 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm font-semibold">{repo.stargazers_count}</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <GitFork size={16} className="text-blue-500" />
-                  <span className="text-sm font-semibold">{repo.forks_count}</span>
+                  <GitFork size={14} className="text-blue-500 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm font-semibold">{repo.forks_count}</span>
                 </div>
               </div>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed mb-8">
+            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-8">
               {repo.description || "This project is a testament to technical exploration and problem-solving. It demonstrates the use of modern development practices and a commitment to building clean, efficient code."}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8">
+              <div className="p-3 sm:p-4 rounded-xl bg-secondary/50 border border-border/50">
                 <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                  <Calendar size={14} />
-                  <span className="text-[10px] uppercase tracking-wider font-bold">Last Updated</span>
+                  <Calendar size={12} className="sm:w-3.5 sm:h-3.5" />
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider font-bold">Last Updated</span>
                 </div>
-                <p className="text-sm font-semibold">
+                <p className="text-xs sm:text-sm font-semibold">
                   {repo.updated_at ? new Date(repo.updated_at).toLocaleDateString() : "Recently"}
                 </p>
               </div>
-              <div className="p-4 rounded-xl bg-secondary/50 border border-border/50">
+              <div className="p-3 sm:p-4 rounded-xl bg-secondary/50 border border-border/50">
                 <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                  <ExternalLink size={14} />
-                  <span className="text-[10px] uppercase tracking-wider font-bold">Source</span>
+                  <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider font-bold">Source</span>
                 </div>
-                <p className="text-sm font-semibold">GitHub Repository</p>
+                <p className="text-xs sm:text-sm font-semibold">GitHub Repository</p>
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-3">
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 rounded-xl border border-border hover:bg-secondary transition-colors text-sm font-semibold"
+                className="px-6 py-2.5 rounded-xl border border-border hover:bg-secondary transition-colors text-xs sm:text-sm font-semibold min-h-[44px]"
               >
                 Close
               </button>
@@ -109,10 +109,10 @@ const RepoModal = ({ repo, onClose }: RepoModalProps) => {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground hover:scale-[1.02] active:scale-[0.98] transition-all text-sm font-bold flex items-center gap-2"
+                className="px-6 py-2.5 rounded-xl bg-primary text-primary-foreground hover:scale-[1.02] active:scale-[0.98] transition-all text-xs sm:text-sm font-bold flex items-center justify-center gap-2 min-h-[44px]"
               >
                 View on GitHub
-                <ExternalLink size={16} />
+                <ExternalLink size={14} className="sm:w-4 sm:h-4" />
               </a>
             </div>
           </div>

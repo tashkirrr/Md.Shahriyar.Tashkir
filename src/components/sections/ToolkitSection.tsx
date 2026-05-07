@@ -116,10 +116,10 @@ const ToolkitSection = () => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 5, scale: 0.95 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-card border border-border text-xs text-primary whitespace-nowrap shadow-xl"
+                          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-3 px-3 py-2 rounded-lg bg-card border border-border text-[10px] sm:text-xs text-primary font-bold whitespace-nowrap shadow-2xl ring-1 ring-primary/20"
                         >
                           {skill.level}
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-card border-r border-b border-border rotate-45 -mt-1" />
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-card border-r border-b border-border rotate-45 -mt-1.5" />
                         </motion.div>
                       )}
                     </AnimatePresence>
