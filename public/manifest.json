@@ -1,0 +1,21 @@
+{
+  "name": "Md. Shahriyar Tashkir | Portfolio",
+  "short_name": "Tashkir",
+  "description": "Creative Developer & Technical Designer Portfolio",
+  "start_url": "/Md.Shahriyar.Tashkir/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00f2fe",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/024RWhmB/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/024RWhmB/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState, useCallback } from "react";
 import { Code2, Star, GitFork, ExternalLink, Palette, ArrowRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import RepoModal from "./RepoModal";
 
 interface GitHubRepo {
   id: number;
@@ -11,6 +12,7 @@ interface GitHubRepo {
   language: string | null;
   stargazers_count: number;
   forks_count: number;
+  updated_at?: string;
 }
 
 const langColors: Record<string, string> = {
@@ -34,18 +36,17 @@ const ProjectsSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedRepo, setSelectedRepo] = useState<GitHubRepo | null>(null);
 
   const fetchRepos = useCallback(async (force = false) => {
     setLoading(true);
     setError(null);
 
-    // Check Cache first
     if (!force) {
       const cached = sessionStorage.getItem("github_repos");
       if (cached) {
         try {
           const { data, timestamp } = JSON.parse(cached);
-          // 30 minute cache
           if (Date.now() - timestamp < 1800000) {
             setRepos(data);
             setLoading(false);
@@ -106,6 +107,7 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-24">
+      <RepoModal repo={selectedRepo} onClose={() => setSelectedRepo(null)} />
       <div className="section-container">
         <motion.div
           ref={ref}
@@ -181,11 +183,9 @@ const ProjectsSection = () => {
                     </div>
                   ))
                 : paginatedRepos.map((repo) => (
-                    <motion.a
+                    <motion.div
                       key={repo.id}
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={() => setSelectedRepo(repo)}
                       className="bento-item group cursor-pointer flex flex-col min-h-[160px] relative transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
                     >
                       <div className="flex items-center justify-between mb-4">
@@ -221,14 +221,14 @@ const ProjectsSection = () => {
                         </span>
                       </div>
 
-                      {/* "See More" Hover Overlay */}
+                      {/* "Details" Hover Overlay */}
                       <div className="absolute inset-0 bg-primary/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                         <div className="bg-background/90 border border-primary/30 px-3 py-1.5 rounded-full flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                          <span className="text-[10px] font-medium text-primary font-bold">See More</span>
+                          <span className="text-[10px] font-medium text-primary font-bold">Details</span>
                           <ArrowRight size={14} className="text-primary" />
                         </div>
                       </div>
-                    </motion.a>
+                    </motion.div>
                   ))}
             </motion.div>
           </AnimatePresence>

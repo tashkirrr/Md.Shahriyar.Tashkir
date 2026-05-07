@@ -19,6 +19,7 @@ import ConnectSection from "@/components/sections/ConnectSection";
 // Common Components
 import ScrollToTop from "@/components/common/ScrollToTop";
 import CommandPalette from "@/components/common/CommandPalette";
+import SEO from "@/components/common/SEO";
 
 import { motion } from "framer-motion";
 
@@ -45,6 +46,7 @@ const Section = ({ children, id }: { children: React.ReactNode; id?: string }) =
 const Index = () => {
   return (
     <SecurityProvider>
+      <SEO />
       <GridBackground />
       <FloatingBlobs />
       <div className="relative min-h-[100dvh] overflow-x-hidden" style={{ zIndex: 10 }}>
