@@ -1,5 +1,5 @@
-import GridBackground from "@/components/GridBackground";
-import FloatingBlobs from "@/components/FloatingBlobs";
+import GridBackground from "@/components/layout/GridBackground";
+import FloatingBlobs from "@/components/layout/FloatingBlobs";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 

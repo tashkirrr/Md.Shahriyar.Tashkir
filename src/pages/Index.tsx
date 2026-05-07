@@ -1,19 +1,25 @@
-import GridBackground from "@/components/GridBackground";
-import FloatingBlobs from "@/components/FloatingBlobs";
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import RoadmapSection from "@/components/RoadmapSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ToolkitSection from "@/components/ToolkitSection";
-import CredentialsSection from "@/components/CredentialsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import BlogSection from "@/components/BlogSection";
-import ConnectSection from "@/components/ConnectSection";
-import Footer from "@/components/Footer";
-import ScrollToTop from "@/components/ScrollToTop";
-import CommandPalette from "@/components/CommandPalette";
-import SecurityProvider from "@/components/SecurityProvider";
+// Layout Components
+import GridBackground from "@/components/layout/GridBackground";
+import FloatingBlobs from "@/components/layout/FloatingBlobs";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import SecurityProvider from "@/components/layout/SecurityProvider";
+
+// Section Components
+import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "@/components/sections/AboutSection";
+import RoadmapSection from "@/components/sections/RoadmapSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ToolkitSection from "@/components/sections/ToolkitSection";
+import CredentialsSection from "@/components/sections/CredentialsSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import BlogSection from "@/components/sections/BlogSection";
+import ConnectSection from "@/components/sections/ConnectSection";
+
+// Common Components
+import ScrollToTop from "@/components/common/ScrollToTop";
+import CommandPalette from "@/components/common/CommandPalette";
+
 import { motion } from "framer-motion";
 
 const revealVariants = {
