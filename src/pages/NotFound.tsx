@@ -1,3 +1,5 @@
+import GridBackground from "@/components/GridBackground";
+import FloatingBlobs from "@/components/FloatingBlobs";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -9,11 +11,16 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
+    <div className="flex min-h-screen items-center justify-center relative overflow-hidden">
+      <GridBackground />
+      <FloatingBlobs />
+      <div className="text-center relative z-10 p-8 glass-card border-primary/20">
+        <h1 className="mb-4 text-7xl font-bold text-gradient">404</h1>
+        <p className="mb-6 text-xl text-foreground font-medium">Oops! Page not found</p>
+        <a 
+          href="/" 
+          className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
+        >
           Return to Home
         </a>
       </div>
