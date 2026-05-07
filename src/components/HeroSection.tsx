@@ -15,13 +15,14 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            <p className="font-medium text-primary text-sm">Hello, I'm</p>
-            <h1 className="heading-display text-4xl sm:text-5xl lg:text-6xl text-foreground leading-tight">
-              Creative<br />
-              <span className="text-gradient">Developer</span>
+            <p className="font-medium text-primary text-sm mb-2">Hello, I'm</p>
+            <h1 className="heading-display text-4xl sm:text-5xl lg:text-7xl text-foreground leading-[1.1] mb-6 tracking-tight">
+              Mohammad Shahriyar<br />
+              <span className="text-gradient">Tashkir</span>
             </h1>
-            <p className="text-lg sm:text-xl text-foreground/90">
-              Designing Visuals. Coding Logic. Driving Impact.
+            <p className="text-xl sm:text-2xl text-foreground/90 font-medium max-w-xl leading-relaxed">
+              A <span className="text-primary/90">Creative Designer</span> and <br className="hidden sm:block" />
+              <span className="text-accent/90">Computer Science Student</span>
             </p>
             <p className="text-muted-foreground max-w-lg">
               From 4+ years of professional Graphic Design to Computer Science &amp; Engineering at Daffodil International University (DIU).
