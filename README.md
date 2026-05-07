@@ -2,8 +2,6 @@
 
 Welcome to the source code of my personal portfolio—a project that represents the intersection of my 4+ years in professional Graphic Design and my current path in Computer Science & Engineering. This isn't just a website; it's a "Cinematic Experience" built to show how logic and aesthetics can exist in perfect harmony.
 
-![Portfolio Preview](https://i.postimg.cc/024RWhmB/icon.png)
-
 ---
 
 ## 🚀 The Vision: "Pixels Meet Logic"
