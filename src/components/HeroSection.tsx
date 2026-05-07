@@ -24,9 +24,7 @@ const HeroSection = () => {
               A <span className="text-primary/90">Creative Designer</span> and <br className="hidden sm:block" />
               <span className="text-accent/90">Computer Science Student</span>
             </p>
-            <p className="text-muted-foreground max-w-lg">
-              From 4+ years of professional Graphic Design to Computer Science &amp; Engineering at Daffodil International University (DIU).
-            </p>
+
 
             {/* Personal Note */}
             <motion.blockquote
