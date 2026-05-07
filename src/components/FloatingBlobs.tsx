@@ -2,50 +2,33 @@ import { motion } from "framer-motion";
 
 const FloatingBlobs = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Primary Blob */}
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-50">
+      {/* Primary Blob - Reduced blur and size */}
       <motion.div
         animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]"
-      />
-      
-      {/* Accent Blob */}
-      <motion.div
-        animate={{
-          x: [0, -100, 0],
-          y: [0, 80, 0],
-          scale: [1, 1.2, 1],
+          x: [0, 40, 0],
+          y: [0, 20, 0],
         }}
         transition={{
           duration: 25,
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute top-[20%] -right-[10%] w-[35%] h-[35%] bg-accent/10 rounded-full blur-[100px]"
+        className="absolute -top-[5%] -left-[5%] w-[30%] h-[30%] bg-primary/10 rounded-full blur-[80px]"
       />
-
-      {/* Tertiary Blob */}
+      
+      {/* Accent Blob - Simplified movement */}
       <motion.div
         animate={{
-          x: [0, 50, 0],
-          y: [0, -100, 0],
-          scale: [1, 0.9, 1],
+          x: [0, -40, 0],
+          y: [0, 30, 0],
         }}
         transition={{
-          duration: 22,
+          duration: 30,
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-primary/5 rounded-full blur-[80px]"
+        className="absolute top-[30%] -right-[5%] w-[25%] h-[25%] bg-accent/10 rounded-full blur-[70px]"
       />
     </div>
   );

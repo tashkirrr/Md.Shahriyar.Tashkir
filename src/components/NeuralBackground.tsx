@@ -107,15 +107,13 @@ const NeuralBackground = () => {
     <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: -1, pointerEvents: "none" }}>
       <canvas
         ref={canvasRef}
-        className="fixed inset-0"
+        className="fixed inset-0 opacity-40"
         style={{
           zIndex: 0,
           pointerEvents: "none",
           transform: "translate3d(0,0,0)",
         }}
       />
-      <div className="noise-overlay" />
-      <div className="scanline-overlay" />
     </div>
   );
 };
