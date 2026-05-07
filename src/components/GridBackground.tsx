@@ -34,15 +34,63 @@ const GridBackground = () => {
       twinkle: Math.random() * Math.PI,
     }));
 
-    // Shooting stars logic
-    let stars: { x: number; y: number; vx: number; vy: number; length: number; opacity: number }[] = [];
+    // Floating shapes
+    const shapes = Array.from({ length: 8 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 30 + 20,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2,
+      rotation: Math.random() * Math.PI * 2,
+      rv: (Math.random() - 0.5) * 0.01,
+    }));
+
+    // Mouse trail
+    let trail: { x: number; y: number; life: number; size: number }[] = [];
 
     let animationFrameId: number;
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const nodes = nodesRef.current as any[];
       const mouse = mouseRef.current;
-      const maxDist = 120; // Reduced to keep connections clean with high density
+      const maxDist = 120;
+
+      // Handle trail
+      if (mouse.x > 0) {
+        trail.push({ x: mouse.x, y: mouse.y, life: 1, size: Math.random() * 2 + 1 });
+      }
+      trail = trail.filter(t => {
+        t.life -= 0.02;
+        if (t.life <= 0) return false;
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, t.size * t.life, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(45, 212, 191, ${t.life * 0.3})`;
+        ctx.fill();
+        return true;
+      });
+
+      // Handle shapes
+      for (const s of shapes) {
+        s.x += s.vx;
+        s.y += s.vy;
+        s.rotation += s.rv;
+        if (s.x < -50) s.x = canvas.width + 50;
+        if (s.x > canvas.width + 50) s.x = -50;
+        if (s.y < -50) s.y = canvas.height + 50;
+        if (s.y > canvas.height + 50) s.y = -50;
+
+        ctx.save();
+        ctx.translate(s.x, s.y);
+        ctx.rotate(s.rotation);
+        ctx.beginPath();
+        ctx.moveTo(0, -s.size / 2);
+        ctx.lineTo(s.size / 2, s.size / 2);
+        ctx.lineTo(-s.size / 2, s.size / 2);
+        ctx.closePath();
+        ctx.strokeStyle = "rgba(45, 212, 191, 0.1)";
+        ctx.stroke();
+        ctx.restore();
+      }
 
       // Handle shooting stars
       if (Math.random() < 0.02 && stars.length < 5) {
@@ -93,7 +141,7 @@ const GridBackground = () => {
           n.y += (mdy / mDist) * 0.5;
         }
 
-        // Draw connections (only for nearby stars to avoid clutter)
+        // Draw connections
         for (let j = i + 1; j < nodes.length; j++) {
           const n2 = nodes[j];
           const dx = n.x - n2.x;
@@ -136,7 +184,7 @@ const GridBackground = () => {
       <canvas
         ref={canvasRef}
         className="fixed inset-0 pointer-events-none"
-        style={{ opacity: 0.8, transform: "translate3d(0,0,0)" }}
+        style={{ opacity: 0.9, transform: "translate3d(0,0,0)" }}
       />
     </div>
   );
