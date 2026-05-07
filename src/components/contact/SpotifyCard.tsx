@@ -93,6 +93,7 @@ const SpotifyCard = () => {
 
   const isPlaying = data?.listening_to_spotify;
   const spotify = data?.spotify;
+  const isOffline = data?.discord_status === "offline";
 
   return (
     <div className="bento-item flex flex-col justify-center flex-1 min-h-[160px] overflow-hidden">
@@ -100,7 +101,7 @@ const SpotifyCard = () => {
         {isLoading ? (
           <div className="flex items-center gap-3 text-muted-foreground">
             <Music size={20} className="text-primary/50 animate-pulse" />
-            <span className="text-sm">Loading Spotify status...</span>
+            <span className="text-sm">Connecting to Lanyard...</span>
           </div>
         ) : isPlaying && spotify ? (
           <>
@@ -118,10 +119,25 @@ const SpotifyCard = () => {
               <p className="text-muted-foreground text-xs truncate">{spotify.artist}</p>
             </div>
           </>
+        ) : isOffline ? (
+          <div className="flex items-center gap-3 text-muted-foreground opacity-70">
+            <div className="p-2.5 rounded-lg bg-secondary text-muted-foreground/50">
+              <Music size={20} />
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-medium text-muted-foreground/60">Discord Offline</p>
+              <p className="text-sm">Status not available</p>
+            </div>
+          </div>
         ) : (
           <div className="flex items-center gap-3 text-muted-foreground">
-            <Music size={20} className="text-primary/50" />
-            <span className="text-sm">Not listening to anything right now</span>
+            <div className="p-2.5 rounded-lg bg-primary/10 text-primary/50">
+              <Music size={20} />
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-medium text-primary/70">Discord Online</p>
+              <p className="text-sm">Not listening to Spotify</p>
+            </div>
           </div>
         )}
       </div>
