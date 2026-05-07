@@ -25,22 +25,24 @@ const langColors: Record<string, string> = {
   Shell: "bg-lime-400",
 };
 
-const PROJECTS_PER_PAGE = 6;
+const PROJECTS_PER_PAGE = 9;
 
 const ProjectsSection = () => {
   const ref = useRef(null);
   const sectionInView = useInView(ref, { once: true, margin: "-50px" });
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchRepos = useCallback(async () => {
     setLoading(true);
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout for GitHub API
+    const timeoutId = setTimeout(() => controller.abort(), 8000); 
     
     try {
+      // Fetch more repos to support pagination (max 100 per page)
       const response = await fetch(
-        "https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=6",
+        "https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=100",
         { signal: controller.signal }
       );
       clearTimeout(timeoutId);
@@ -53,8 +55,6 @@ const ProjectsSection = () => {
       }
     } catch (error) {
       console.error("GitHub API Error:", error);
-      // Keep loading state false but don't clear repos if we have cached data
-      // This prevents flickering on slow connections
     } finally {
       setLoading(false);
     }
@@ -64,6 +64,18 @@ const ProjectsSection = () => {
     fetchRepos();
   }, [fetchRepos]);
 
+  const totalPages = Math.ceil(repos.length / PROJECTS_PER_PAGE);
+  const paginatedRepos = repos.slice(
+    (currentPage - 1) * PROJECTS_PER_PAGE,
+    currentPage * PROJECTS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    const el = document.getElementById("projects");
+    el?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section id="projects" className="py-24">
       <div className="section-container">
@@ -71,25 +83,23 @@ const ProjectsSection = () => {
           ref={ref}
           className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12"
         >
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-            <div>
-              <h2 className="heading-display text-3xl sm:text-4xl text-foreground mb-2">
-                Featured <span className="text-gradient">Projects</span>
-              </h2>
-              <p className="font-medium text-[10px] sm:text-xs text-muted-foreground">
-                Latest work from my GitHub
-              </p>
-            </div>
-            <a 
-              href="https://github.com/tashkirrr?tab=repositories" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="font-medium text-xs text-primary hover:text-accent transition-colors flex items-center gap-2 group"
-            >
-              View all on GitHub
-              <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+          <div>
+            <h2 className="heading-display text-3xl sm:text-4xl text-foreground mb-2">
+              All <span className="text-gradient">Projects</span>
+            </h2>
+            <p className="font-medium text-[10px] sm:text-xs text-muted-foreground">
+              A comprehensive archive of my work on GitHub
+            </p>
           </div>
+          <a 
+            href="https://github.com/tashkirrr?tab=repositories" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="font-medium text-xs text-primary hover:text-accent transition-colors flex items-center gap-2 group"
+          >
+            View profile on GitHub
+            <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+          </a>
         </motion.div>
 
         <a
@@ -114,13 +124,13 @@ const ProjectsSection = () => {
         </a>
 
         {/* Repos Grid */}
-        <div className="relative">
+        <div className="relative min-h-[600px]">
           <AnimatePresence mode="wait">
             <motion.div
-              key={repos.length}
-              initial={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 1.02, filter: "blur(4px)" }}
+              key={currentPage}
+              initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, x: -20, filter: "blur(4px)" }}
               transition={{ duration: 0.4, ease: "circOut" }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
@@ -132,15 +142,12 @@ const ProjectsSection = () => {
                       <Skeleton className="h-3 w-1/2" />
                     </div>
                   ))
-                : repos.map((repo) => (
+                : paginatedRepos.map((repo) => (
                     <motion.a
                       key={repo.id}
                       href={repo.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.35 }}
                       className="bento-item group cursor-pointer flex flex-col min-h-[160px] relative transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
                     >
                       <div className="flex items-center justify-between mb-4">
@@ -188,6 +195,25 @@ const ProjectsSection = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+
+        {/* Pagination Controls */}
+        {!loading && totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-12">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => handlePageChange(i + 1)}
+                className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-semibold transition-all ${
+                  currentPage === i + 1
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                    : "bg-secondary text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
