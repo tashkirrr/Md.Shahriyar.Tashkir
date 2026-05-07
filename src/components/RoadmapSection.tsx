@@ -3,12 +3,13 @@ import { useRef } from "react";
 import TiltCard from "@/components/ui/tilt-card";
 
 const milestones = [
-  { year: "2022", title: "Divisional Round Champion", desc: "ICT Olympiad Bangladesh" },
-  { year: "2022–23", title: "General Secretary", desc: "ACPS IT Club — Leadership & Campus IT Festivals" },
-  { year: "2023", title: "SSC Graduate (Science)", desc: "Adamjee Cantonment Public School — GPA 5.00" },
-  { year: "2024", title: "COP 29 Organizer", desc: '"Youth for a Green Earth" — Shaping Climate Demands' },
-  { year: "2025", title: "HSC Graduate (Science)", desc: "Adamjee Cantonment College — GPA 4.50" },
-  { year: "2025", title: "AI for Bangladesh Summit", desc: "Certified in emerging AI competencies" },
+  { year: "2021", title: "Campus Ambassador", desc: "Frame The Moment 2.0 — Photography & Visual Arts" },
+  { year: "2022", title: "Divisional Champion", desc: "ICT Olympiad Bangladesh — National Recognition" },
+  { year: "2022–23", title: "General Secretary", desc: "ACPS IT Club — Leading technical innovation & digital literacy" },
+  { year: "2023", title: "SSC Science (5.00)", desc: "Adamjee Cantonment Public School — Early tech leadership" },
+  { year: "2024", title: "IT & Graphics Director", desc: "Youth For a Green Earth — Shaping organization visual identity" },
+  { year: "2025", title: "HSC Science (4.50)", desc: "Adamjee Cantonment College — Professional Graphic Design" },
+  { year: "2025", title: "Secretary of Graphics", desc: "UYFSR — Designing official organizational branding" },
   { year: "2026–Present", title: "B.Sc. in CSE", desc: "Daffodil International University (DIU)" },
 ];
 

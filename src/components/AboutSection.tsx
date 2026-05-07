@@ -23,7 +23,7 @@ const AboutSection = () => {
 
           <div className="bento-item max-w-3xl">
             <p className="text-foreground/85 leading-relaxed">
-              Starting from Adamjee Cantonment Public School as IT Club General Secretary to 4+ years as a professional Graphic Designer (Adobe/Affinity Suite). Science graduate from Adamjee Cantonment College (SSC 5.00, HSC 4.50). Currently focusing all energy on B.Sc. in Computer Science at DIU while staying active in climate advocacy with UYFSR and Youth for a Green Earth.
+              I work across design and development, building technical projects and handling high-impact visual work for organizations. Currently, I'm a Computer Science student at DIU while serving as Director of IT & Graphics at Youth For a Green Earth and Secretary of Graphics at UYFSR. I focus on bridging the gap between creative design and technical logic, with a growing interest in machine learning and data privacy.
             </p>
             <div className="mt-6">
               <a
