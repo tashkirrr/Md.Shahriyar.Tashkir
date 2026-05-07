@@ -38,7 +38,12 @@ const Section = ({ children, id }: { children: React.ReactNode; id?: string }) =
 
 const Index = () => {
   return (
-    <div className="relative min-h-[100dvh] overflow-x-hidden">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="relative min-h-[100dvh] overflow-x-hidden"
+    >
       <NeuralBackground />
       <FloatingBlobs />
       <Header />
@@ -56,7 +61,7 @@ const Index = () => {
       <Footer />
       <ScrollToTop />
       <CommandPalette />
-    </div>
+    </motion.div>
   );
 };
 
