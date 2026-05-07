@@ -13,6 +13,7 @@ import ConnectSection from "@/components/ConnectSection";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import CommandPalette from "@/components/CommandPalette";
+import SecurityProvider from "@/components/SecurityProvider";
 import { motion } from "framer-motion";
 
 const revealVariants = {
@@ -37,7 +38,7 @@ const Section = ({ children, id }: { children: React.ReactNode; id?: string }) =
 
 const Index = () => {
   return (
-    <>
+    <SecurityProvider>
       <GridBackground />
       <FloatingBlobs />
       <div className="relative min-h-[100dvh] overflow-x-hidden" style={{ zIndex: 10 }}>
@@ -57,7 +58,7 @@ const Index = () => {
         <ScrollToTop />
         <CommandPalette />
       </div>
-    </>
+    </SecurityProvider>
   );
 };
 
