@@ -22,9 +22,30 @@ const AboutSection = () => {
           <p className="font-medium text-xs text-muted-foreground mb-8">A bit about my journey</p>
 
           <div className="bento-item max-w-3xl">
-            <p className="text-foreground/85 leading-relaxed">
-              I work across design and development, building technical projects and handling high-impact visual work for organizations. Currently, I'm a Computer Science student at DIU while serving as Director of IT & Graphics at Youth For a Green Earth and Secretary of Graphics at UYFSR. I focus on bridging the gap between creative design and technical logic, with a growing interest in machine learning and data privacy.
-            </p>
+            <div className="text-foreground/85 space-y-4 leading-relaxed">
+              <p>I work across design and development, mostly building small projects and handling visual work for real organizations.</p>
+              
+              <div className="space-y-1">
+                <p className="font-semibold text-primary">Currently:</p>
+                <ul className="list-none space-y-1 pl-1">
+                  <li>– Computer Science student at Daffodil International University</li>
+                  <li>– Director of IT & Graphics at Youth For a Green Earth</li>
+                </ul>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-semibold text-primary">I spend most of my time:</p>
+                <ul className="list-none space-y-1 pl-1">
+                  <li>– Designing campaign visuals and managing social media identity</li>
+                  <li>– Building web projects (portfolio, small tools, ML-based apps)</li>
+                  <li>– Writing and exploring topics around machine learning and data privacy</li>
+                </ul>
+              </div>
+
+              <p>I’ve worked on event campaigns, organizational branding, and a few web-based projects that are live. Lately, I’ve been focusing more on how machine learning can work with data privacy.</p>
+              
+              <p className="font-medium italic text-primary/80">Still learning, still building...</p>
+            </div>
             <div className="mt-6">
               <a
                 href="resume.html"
