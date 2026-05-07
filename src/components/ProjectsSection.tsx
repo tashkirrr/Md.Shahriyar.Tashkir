@@ -32,29 +32,57 @@ const ProjectsSection = () => {
   const sectionInView = useInView(ref, { once: true, margin: "-50px" });
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchRepos = useCallback(async () => {
+  const fetchRepos = useCallback(async (force = false) => {
     setLoading(true);
+    setError(null);
+
+    // Check Cache first
+    if (!force) {
+      const cached = sessionStorage.getItem("github_repos");
+      if (cached) {
+        try {
+          const { data, timestamp } = JSON.parse(cached);
+          // 30 minute cache
+          if (Date.now() - timestamp < 1800000) {
+            setRepos(data);
+            setLoading(false);
+            return;
+          }
+        } catch (e) {
+          sessionStorage.removeItem("github_repos");
+        }
+      }
+    }
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000); 
     
     try {
-      // Fetch more repos to support pagination (max 100 per page)
       const response = await fetch(
         "https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=100",
         { signal: controller.signal }
       );
       clearTimeout(timeoutId);
       
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) {
+        if (response.status === 403) throw new Error("Rate limit exceeded. Please try again later.");
+        throw new Error(`HTTP ${response.status}`);
+      }
       const data = await response.json();
       
       if (Array.isArray(data)) {
         setRepos(data);
+        sessionStorage.setItem("github_repos", JSON.stringify({
+          data,
+          timestamp: Date.now()
+        }));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("GitHub API Error:", error);
+      setError(error.message || "Failed to load projects");
     } finally {
       setLoading(false);
     }
@@ -134,7 +162,17 @@ const ProjectsSection = () => {
               transition={{ duration: 0.4, ease: "circOut" }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {loading
+              {error ? (
+                <div className="col-span-full py-20 flex flex-col items-center justify-center space-y-4 glass-card border-destructive/20">
+                  <p className="text-muted-foreground text-sm font-medium">{error}</p>
+                  <button 
+                    onClick={() => fetchRepos(true)}
+                    className="px-4 py-2 bg-primary/10 text-primary rounded-lg text-xs font-bold hover:bg-primary/20 transition-colors"
+                  >
+                    Retry Loading
+                  </button>
+                </div>
+              ) : loading
                 ? Array.from({ length: PROJECTS_PER_PAGE }).map((_, i) => (
                     <div key={i} className="bento-item space-y-3">
                       <Skeleton className="h-4 w-3/4" />

@@ -209,12 +209,13 @@ const SpotifyWebSocketCard = () => {
     };
 
     const connect = () => {
+      let isMounted = true;
       ws = new WebSocket("wss://api.lanyard.rest/socket");
 
       ws.onmessage = (event) => {
+        if (!isMounted) return;
         const msg = JSON.parse(event.data);
 
-        // Opcode 1: Hello — initialize connection
         if (msg.op === 1) {
           ws?.send(JSON.stringify({
             op: 2,
@@ -222,11 +223,12 @@ const SpotifyWebSocketCard = () => {
           }));
 
           heartbeatInterval = setInterval(() => {
-            ws?.send(JSON.stringify({ op: 3 }));
+            if (ws?.readyState === WebSocket.OPEN) {
+              ws?.send(JSON.stringify({ op: 3 }));
+            }
           }, msg.d.heartbeat_interval);
         }
 
-        // Opcode 0: Event Update
         if (msg.op === 0 && (msg.t === "INIT_STATE" || msg.t === "PRESENCE_UPDATE")) {
           setData(msg.d);
           setIsLoading(false);
@@ -234,20 +236,26 @@ const SpotifyWebSocketCard = () => {
       };
 
       ws.onclose = () => {
+        isMounted = false;
         if (heartbeatInterval) clearInterval(heartbeatInterval);
-        setTimeout(connect, 3000); // Reconnect after 3s
+        setTimeout(() => {
+          if (ws?.readyState === WebSocket.CLOSED) connect();
+        }, 3000);
       };
 
       ws.onerror = () => ws?.close();
     };
 
-    fetchInitial(); // Fast 1s fetch first
-    connect(); // Then WebSocket for real-time updates
+    fetchInitial();
+    connect();
 
     return () => {
       if (restTimeout) clearTimeout(restTimeout);
       if (heartbeatInterval) clearInterval(heartbeatInterval);
-      ws?.close();
+      if (ws) {
+        ws.onclose = null;
+        ws.close();
+      }
     };
   }, []);
 
@@ -370,7 +378,6 @@ const ContactForm = () => {
         maxLength={100}
         pattern="[A-Za-z\s\-\.]+"
         title="Please enter a valid name (letters only)"
-        onChange={(e) => { e.target.value = sanitizeInput(e.target.value); }}
         className="w-full px-4 py-3 rounded-lg bg-secondary/50 text-foreground placeholder:text-muted-foreground border-none focus:ring-1 focus:ring-primary focus:outline-none transition-colors min-h-[44px] text-sm"
         style={{ fontSize: "16px" }}
         autoComplete="off"
@@ -381,7 +388,6 @@ const ContactForm = () => {
         placeholder="Your Email"
         required
         maxLength={100}
-        onChange={(e) => { e.target.value = sanitizeInput(e.target.value); }}
         className="w-full px-4 py-3 rounded-lg bg-secondary/50 text-foreground placeholder:text-muted-foreground border-none focus:ring-1 focus:ring-primary focus:outline-none transition-colors min-h-[44px] text-sm"
         style={{ fontSize: "16px" }}
         autoComplete="off"
@@ -392,7 +398,6 @@ const ContactForm = () => {
         rows={4}
         required
         maxLength={1000}
-        onChange={(e) => { e.target.value = sanitizeInput(e.target.value); }}
         className="w-full px-4 py-3 rounded-lg bg-secondary/50 text-foreground placeholder:text-muted-foreground border-none focus:ring-1 focus:ring-primary focus:outline-none transition-colors resize-none text-sm flex-1"
         style={{ fontSize: "16px" }}
       />
