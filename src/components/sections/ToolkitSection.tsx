@@ -11,6 +11,7 @@ const categories: { label: string; skills: SkillTag[] }[] = [
     label: "Core",
     skills: [
       { name: "C", level: "Core Competency" },
+      { name: "Go", level: "Core Competency" },
       { name: "Python", level: "Core Competency" },
       { name: "SQL", level: "Core Competency" },
       { name: "Algorithm", level: "Core Competency" },
@@ -23,6 +24,7 @@ const categories: { label: string; skills: SkillTag[] }[] = [
       { name: "Linux (Mint)", level: "Core Competency" },
       { name: "Git", level: "Core Competency" },
       { name: "System Design", level: "Current Focus" },
+      { name: "Distributed Systems", level: "Current Focus" },
     ],
   },
   {

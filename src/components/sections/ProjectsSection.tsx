@@ -132,26 +132,49 @@ const ProjectsSection = () => {
           </a>
         </motion.div>
 
-        <a
-          href="https://drive.google.com/drive/folders/19dQKjjD0GSYWCXmZmXmmL5MftLMdJJL0?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bento-item group cursor-pointer block mb-6 border-primary/20 hover:border-primary/40 transition-all hover:shadow-xl hover:shadow-primary/5"
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="font-medium text-xs text-primary bg-primary/10 px-2 py-0.5 rounded">Pinned / Design</span>
-            <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-              <Palette size={28} className="text-primary" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <a
+            href="https://github.com/tashkirrr/RDM-Server"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bento-item group cursor-pointer block border-primary/20 hover:border-primary/40 transition-all hover:shadow-xl hover:shadow-primary/5"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-medium text-xs text-primary bg-primary/10 px-2 py-0.5 rounded">Featured / Engineering</span>
+              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
             </div>
-            <div>
-              <h3 className="font-display font-bold text-foreground text-lg">Visual Storytelling Suite</h3>
-              <p className="text-muted-foreground text-sm mt-1">4+ years of professional design work — branding, UI/UX, marketing collateral.</p>
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Code2 size={28} className="text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-foreground text-lg">RDM-Server</h3>
+                <p className="text-muted-foreground text-sm mt-1">High-performance in-memory key-value store built in Go — designed for low-latency caching.</p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+
+          <a
+            href="https://drive.google.com/drive/folders/19dQKjjD0GSYWCXmZmXmmL5MftLMdJJL0?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bento-item group cursor-pointer block border-primary/20 hover:border-primary/40 transition-all hover:shadow-xl hover:shadow-primary/5"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-medium text-xs text-primary bg-primary/10 px-2 py-0.5 rounded">Pinned / Design</span>
+              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Palette size={28} className="text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-foreground text-lg">Visual Storytelling Suite</h3>
+                <p className="text-muted-foreground text-sm mt-1">4+ years of professional design work — branding, UI/UX, marketing collateral.</p>
+              </div>
+            </div>
+          </a>
+        </div>
 
         {/* Repos Grid */}
         <div className="relative min-h-[600px]">

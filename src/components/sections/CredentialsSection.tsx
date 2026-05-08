@@ -3,9 +3,9 @@ import { useRef } from "react";
 import { Award, ExternalLink, Trophy, Cpu } from "lucide-react";
 
 const honors = [
+  { icon: Trophy, title: "Graphics Design Champion", desc: "Intra College TechCon (2024)" },
   { icon: Trophy, title: "Divisional Round Champion", desc: "ICT Olympiad Bangladesh (2022)" },
   { icon: Cpu, title: "AI for Bangladesh Summit", desc: "Certified in emerging AI competencies (2025)" },
-  { icon: Award, title: "General Secretary", desc: "ACPS IT Club (2022–2023)" },
 ];
 
 const CredentialsSection = () => {
