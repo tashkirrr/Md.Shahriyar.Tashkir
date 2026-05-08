@@ -21,8 +21,8 @@ const HeroSection = () => {
               <span className="text-gradient">Tashkir</span>
             </h1>
             <p className="text-lg sm:text-2xl text-foreground/90 font-medium max-w-xl leading-relaxed">
-              A <span className="text-primary/90">Creative Designer</span> and <br className="hidden sm:block" />
-              <span className="text-accent/90">Computer Science Student</span>
+              A <span className="text-primary/90">Visual Architect</span> and <br className="hidden sm:block" />
+              <span className="text-accent/90">Systems Engineer</span>
             </p>
 
             {/* Personal Note */}

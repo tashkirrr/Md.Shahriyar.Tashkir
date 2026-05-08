@@ -23,29 +23,32 @@ const AboutSection = () => {
 
           <div className="bento-item max-w-3xl">
             <div className="text-foreground/85 space-y-4 leading-relaxed">
-              <p>I work across design and development, mostly building small projects and handling visual work for real organizations.</p>
+              <p>Fusing high-performance logic with premium aesthetics. I am a Visual Architect and Systems Engineer focused on bridging the gap between logic-driven Graphic Design and system-level development.</p>
               
               <div className="space-y-1">
-                <p className="font-semibold text-primary">Currently:</p>
+                <p className="font-semibold text-primary">Philosophy:</p>
+                <p className="italic">"Code is poetry. Design is storytelling."</p>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-semibold text-primary">Current Roles:</p>
                 <ul className="list-none space-y-1 pl-1">
-                  <li>– Computer Science student at Daffodil International University</li>
-                  <li>– Director of IT & Graphics at Youth For a Green Earth</li>
-                  <li>– Secretary of Graphics at United Youth Forum of Science and Research (UYFSR).</li>
+                  <li>– Director of IT & Graphics @ Youth For a Green Earth</li>
+                  <li>– Secretary of Graphics @ UYFSR</li>
+                  <li>– B.Sc. Computer Science @ Daffodil International University</li>
                 </ul>
               </div>
 
               <div className="space-y-1">
-                <p className="font-semibold text-primary">I spend most of my time:</p>
+                <p className="font-semibold text-primary">Technical Focus:</p>
                 <ul className="list-none space-y-1 pl-1">
-                  <li>– Designing campaign visuals and managing social media identity</li>
-                  <li>– Building web projects (portfolio, small tools, ML-based apps)</li>
-                  <li>– Writing and exploring topics around machine learning and data privacy</li>
+                  <li>– Distributed Systems: Building low-latency stores (Go, RDM-Server)</li>
+                  <li>– Visual Identity: Premium branding and organizational UI/UX assets</li>
+                  <li>– AI & Logic: Recursive engines and data-driven analysis</li>
                 </ul>
               </div>
 
-              <p>I’ve worked on event campaigns, organizational branding, and a few web-based projects that are live. Lately, I’ve been focusing more on how machine learning can work with data privacy.</p>
-              
-              <p className="font-medium italic text-primary/80">Still learning, still building...</p>
+              <p className="font-medium italic text-primary/80">Always building, always optimizing.</p>
             </div>
             <div className="mt-6">
               <a
