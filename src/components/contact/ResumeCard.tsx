@@ -15,7 +15,7 @@ const ResumeCard = () => {
         <div className="flex-1 min-w-0">
           <p className="text-foreground text-sm font-semibold">Download Resume</p>
           <p className="text-muted-foreground text-xs mt-1">
-            Get my full CV in PDF format
+            Get my latest resume in digital format
           </p>
         </div>
       </div>
