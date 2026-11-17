@@ -28,6 +28,28 @@ const langColors: Record<string, string> = {
 };
 
 const PROJECTS_PER_PAGE = 9;
+const GITHUB_REPOS_CACHE_KEY = "github_repos";
+const GITHUB_REPOS_CACHE_TTL = 30 * 60 * 1000;
+
+const readCachedRepos = () => {
+  try {
+    const cached = sessionStorage.getItem(GITHUB_REPOS_CACHE_KEY);
+    if (!cached) return null;
+
+    const parsed = JSON.parse(cached) as { data?: GitHubRepo[]; timestamp?: number };
+    if (!Array.isArray(parsed.data) || typeof parsed.timestamp !== "number") {
+      return null;
+    }
+
+    if (Date.now() - parsed.timestamp > GITHUB_REPOS_CACHE_TTL) {
+      return null;
+    }
+
+    return parsed.data;
+  } catch {
+    return null;
+  }
+};
 
 const ProjectsSection = () => {
   const ref = useRef(null);
@@ -42,28 +64,39 @@ const ProjectsSection = () => {
     setLoading(true);
     setError(null);
 
+    const cachedRepos = !force ? readCachedRepos() : null;
+    if (cachedRepos) {
+      setRepos(cachedRepos);
+      setLoading(false);
+      return;
+    }
+
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); 
-    
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
     try {
       const response = await fetch(
         "https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=100",
         { signal: controller.signal }
       );
       clearTimeout(timeoutId);
-      
+
       if (!response.ok) {
         if (response.status === 403) throw new Error("Rate limit exceeded. Please try again later.");
         throw new Error(`HTTP ${response.status}`);
       }
       const data = await response.json();
-      
+
       if (Array.isArray(data)) {
         setRepos(data);
-        sessionStorage.setItem("github_repos", JSON.stringify({
-          data,
-          timestamp: Date.now()
-        }));
+        try {
+          sessionStorage.setItem(GITHUB_REPOS_CACHE_KEY, JSON.stringify({
+            data,
+            timestamp: Date.now(),
+          }));
+        } catch {
+          // Ignore storage failures in strict browsing modes.
+        }
       }
     } catch (error: any) {
       console.error("GitHub API Error:", error);

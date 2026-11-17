@@ -11,6 +11,28 @@ interface MediumPost {
 }
 
 const BLOG_POSTS_PER_PAGE = 9;
+const MEDIUM_CACHE_KEY = "medium_posts";
+const MEDIUM_CACHE_TTL = 30 * 60 * 1000;
+
+const readCachedPosts = () => {
+  try {
+    const cached = sessionStorage.getItem(MEDIUM_CACHE_KEY);
+    if (!cached) return null;
+
+    const parsed = JSON.parse(cached) as { posts?: MediumPost[]; timestamp?: number };
+    if (!Array.isArray(parsed.posts) || typeof parsed.timestamp !== "number") {
+      return null;
+    }
+
+    if (Date.now() - parsed.timestamp > MEDIUM_CACHE_TTL) {
+      return null;
+    }
+
+    return parsed.posts;
+  } catch {
+    return null;
+  }
+};
 
 const BlogSection = () => {
   const ref = useRef(null);
@@ -22,19 +44,26 @@ const BlogSection = () => {
   const [lastSynced, setLastSynced] = useState<string>("Loading...");
 
   const fetchPosts = useCallback(async () => {
+    const cachedPosts = readCachedPosts();
+    if (cachedPosts) {
+      setPosts(cachedPosts);
+      setLoading(false);
+      return;
+    }
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 1000); // 1s timeout
-    
+
     try {
       const res = await fetch(
         "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@tashkir2006",
         { signal: controller.signal }
       );
       clearTimeout(timeoutId);
-      
+
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      
+
       if (data.status === "ok" && data.items) {
         const mapped: MediumPost[] = data.items.map((item: Record<string, unknown>) => {
           const title = String(item.title ?? "");
@@ -57,6 +86,14 @@ const BlogSection = () => {
           };
         });
         setPosts(mapped);
+        try {
+          sessionStorage.setItem(MEDIUM_CACHE_KEY, JSON.stringify({
+            posts: mapped,
+            timestamp: Date.now(),
+          }));
+        } catch {
+          // Ignore storage failures in strict browser contexts.
+        }
         setLastSynced(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
       }
     } catch (err) {
@@ -76,6 +113,10 @@ const BlogSection = () => {
     }, 30000); // 30s sync
     return () => clearInterval(pollInterval);
   }, [fetchPosts]);
+
+  useEffect(() => {
+    setPage((currentPage) => Math.min(currentPage, Math.max(0, Math.ceil(posts.length / BLOG_POSTS_PER_PAGE) - 1)));
+  }, [posts.length]);
 
   const totalPages = Math.max(1, Math.ceil(posts.length / BLOG_POSTS_PER_PAGE));
   const pagedPosts = posts.slice(page * BLOG_POSTS_PER_PAGE, (page + 1) * BLOG_POSTS_PER_PAGE);

@@ -17,10 +17,15 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [isLight, setIsLight] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") === "light";
+    if (typeof window === "undefined") {
+      return false;
     }
-    return false;
+
+    try {
+      return window.localStorage.getItem("theme") === "light";
+    } catch {
+      return false;
+    }
   });
   const [scrolled, setScrolled] = useState(false);
   const [clock, setClock] = useState("");
@@ -50,7 +55,12 @@ const Header = () => {
 
   useEffect(() => {
     document.documentElement.classList.toggle("light", isLight);
-    localStorage.setItem("theme", isLight ? "light" : "dark");
+
+    try {
+      window.localStorage.setItem("theme", isLight ? "light" : "dark");
+    } catch {
+      // Ignore storage quota or privacy restrictions.
+    }
   }, [isLight]);
 
   // Live Dhaka clock
