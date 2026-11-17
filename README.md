@@ -76,10 +76,22 @@ If you're looking to explore the code or run this locally:
     ```bash
     npm run dev
     ```
-4.  **Production Build**:
+4.  **Type-check and Production Build**:
     ```bash
+    npm run typecheck
     npm run build
     ```
+5.  **Deploy to GitHub Pages**:
+    ```bash
+    npm run deploy
+    ```
+    The repository's GitHub Pages source must use the `gh-pages` branch and `/` folder.
+
+### Contact Form Configuration
+
+The contact form uses EmailJS. Copy `.env.example` to `.env.local` and set
+`VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, and `VITE_EMAILJS_PUBLIC_KEY`.
+If these values are not configured, the form displays the direct email address instead.
 
 ---
 

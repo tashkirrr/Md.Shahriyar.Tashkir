@@ -3,7 +3,6 @@ import GridBackground from "@/components/layout/GridBackground";
 import FloatingBlobs from "@/components/layout/FloatingBlobs";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import SecurityProvider from "@/components/layout/SecurityProvider";
 
 // Section Components
 import HeroSection from "@/components/sections/HeroSection";
@@ -21,9 +20,9 @@ import ScrollToTop from "@/components/common/ScrollToTop";
 import CommandPalette from "@/components/common/CommandPalette";
 import SEO from "@/components/common/SEO";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const revealVariants = {
+const revealVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: { 
     opacity: 1, 
@@ -45,7 +44,7 @@ const Section = ({ children, id }: { children: React.ReactNode; id?: string }) =
 
 const Index = () => {
   return (
-    <SecurityProvider>
+    <>
       <SEO />
       <GridBackground />
       <FloatingBlobs />
@@ -66,7 +65,7 @@ const Index = () => {
         <ScrollToTop />
         <CommandPalette />
       </div>
-    </SecurityProvider>
+    </>
   );
 };
 

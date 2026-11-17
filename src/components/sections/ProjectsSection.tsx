@@ -5,13 +5,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import RepoModal from "./RepoModal";
 
 interface GitHubRepo {
-  id: number;
+  id: number | string;
   name: string;
   description: string | null;
   html_url: string;
   language: string | null;
-  stargazers_count: number;
-  forks_count: number;
+  stargazers_count?: number;
+  forks_count?: number;
   updated_at?: string;
 }
 
@@ -30,22 +30,55 @@ const langColors: Record<string, string> = {
 const PROJECTS_PER_PAGE = 9;
 const GITHUB_REPOS_CACHE_KEY = "github_repos";
 const GITHUB_REPOS_CACHE_TTL = 30 * 60 * 1000;
+const FEATURED_REPOS: GitHubRepo[] = [
+  {
+    id: "portfolio",
+    name: "Md.Shahriyar.Tashkir",
+    description: "Professional portfolio bridging graphic design and computer science.",
+    html_url: "https://github.com/tashkirrr/Md.Shahriyar.Tashkir",
+    language: "TypeScript",
+  },
+  {
+    id: "housing-price-prediction",
+    name: "housing-price-prediction",
+    description: "Predicting real estate values using machine learning and data-driven insights.",
+    html_url: "https://github.com/tashkirrr/housing-price-prediction",
+    language: "Jupyter Notebook",
+  },
+  {
+    id: "RDM-Server",
+    name: "RDM-Server",
+    description: "High-performance in-memory key-value store built from scratch in Go.",
+    html_url: "https://github.com/tashkirrr/RDM-Server",
+    language: "Go",
+  },
+  {
+    id: "tic-tac-toe",
+    name: "tic-tac-toe",
+    description: "Unbeatable Tic-Tac-Toe with a Minimax-powered computer opponent.",
+    html_url: "https://github.com/tashkirrr/tic-tac-toe",
+    language: "JavaScript",
+  },
+  {
+    id: "qr_craft_gen",
+    name: "qr_craft_gen",
+    description: "A customizable QR code generator designed for branding and rapid deployment.",
+    html_url: "https://github.com/tashkirrr/qr_craft_gen",
+    language: "CSS",
+  },
+];
 
-const readCachedRepos = () => {
+const readCachedRepos = (): { data: GitHubRepo[]; timestamp: number } | null => {
   try {
-    const cached = sessionStorage.getItem(GITHUB_REPOS_CACHE_KEY);
+    const cached = localStorage.getItem(GITHUB_REPOS_CACHE_KEY);
     if (!cached) return null;
 
     const parsed = JSON.parse(cached) as { data?: GitHubRepo[]; timestamp?: number };
-    if (!Array.isArray(parsed.data) || typeof parsed.timestamp !== "number") {
+    if (!Array.isArray(parsed.data) || typeof parsed.timestamp !== "number" || !Number.isFinite(parsed.timestamp)) {
       return null;
     }
 
-    if (Date.now() - parsed.timestamp > GITHUB_REPOS_CACHE_TTL) {
-      return null;
-    }
-
-    return parsed.data;
+    return { data: parsed.data, timestamp: parsed.timestamp };
   } catch {
     return null;
   }
@@ -54,7 +87,7 @@ const readCachedRepos = () => {
 const ProjectsSection = () => {
   const ref = useRef(null);
   const sectionInView = useInView(ref, { once: true, margin: "-50px" });
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [repos, setRepos] = useState<GitHubRepo[]>(FEATURED_REPOS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,9 +99,11 @@ const ProjectsSection = () => {
 
     const cachedRepos = !force ? readCachedRepos() : null;
     if (cachedRepos) {
-      setRepos(cachedRepos);
-      setLoading(false);
-      return;
+      setRepos(cachedRepos.data);
+      if (Date.now() - cachedRepos.timestamp < GITHUB_REPOS_CACHE_TTL) {
+        setLoading(false);
+        return;
+      }
     }
 
     const controller = new AbortController();
@@ -79,7 +114,6 @@ const ProjectsSection = () => {
         "https://api.github.com/users/tashkirrr/repos?sort=updated&per_page=100",
         { signal: controller.signal }
       );
-      clearTimeout(timeoutId);
 
       if (!response.ok) {
         if (response.status === 403) throw new Error("Rate limit exceeded. Please try again later.");
@@ -87,21 +121,24 @@ const ProjectsSection = () => {
       }
       const data = await response.json();
 
-      if (Array.isArray(data)) {
-        setRepos(data);
-        try {
-          sessionStorage.setItem(GITHUB_REPOS_CACHE_KEY, JSON.stringify({
-            data,
-            timestamp: Date.now(),
-          }));
-        } catch {
-          // Ignore storage failures in strict browsing modes.
-        }
+      if (!Array.isArray(data)) {
+        throw new Error("GitHub returned an unexpected repository list.");
       }
-    } catch (error: any) {
+      setRepos(data);
+      setCurrentPage(1);
+      try {
+        localStorage.setItem(GITHUB_REPOS_CACHE_KEY, JSON.stringify({
+          data,
+          timestamp: Date.now(),
+        }));
+      } catch {
+        // The repository list remains usable when browser storage is unavailable.
+      }
+    } catch (error: unknown) {
       console.error("GitHub API Error:", error);
-      setError(error.message || "Failed to load projects");
+      setError(error instanceof Error ? error.message : "Failed to load projects");
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }, []);
@@ -181,7 +218,7 @@ const ProjectsSection = () => {
               transition={{ duration: 0.4, ease: "circOut" }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {error ? (
+              {error && repos.length === 0 ? (
                 <div className="col-span-full py-20 flex flex-col items-center justify-center space-y-4 glass-card border-destructive/20">
                   <p className="text-muted-foreground text-sm font-medium">{error}</p>
                   <button 
@@ -191,7 +228,7 @@ const ProjectsSection = () => {
                     Retry Loading
                   </button>
                 </div>
-              ) : loading
+              ) : loading && repos.length === 0
                 ? Array.from({ length: PROJECTS_PER_PAGE }).map((_, i) => (
                     <div key={i} className="bento-item space-y-3">
                       <Skeleton className="h-4 w-3/4" />
@@ -199,7 +236,20 @@ const ProjectsSection = () => {
                       <Skeleton className="h-3 w-1/2" />
                     </div>
                   ))
-                : paginatedRepos.map((repo) => (
+                : (
+                  <>
+                    {error && (
+                      <div className="col-span-full flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+                        <span>Showing featured projects while GitHub is unavailable.</span>
+                        <button
+                          onClick={() => fetchRepos(true)}
+                          className="text-primary hover:underline"
+                        >
+                          Retry
+                        </button>
+                      </div>
+                    )}
+                    {paginatedRepos.map((repo) => (
                     <motion.div
                       key={repo.id}
                       onClick={() => setSelectedRepo(repo)}
@@ -246,7 +296,9 @@ const ProjectsSection = () => {
                         </div>
                       </div>
                     </motion.div>
-                  ))}
+                    ))}
+                  </>
+                )}
             </motion.div>
           </AnimatePresence>
         </div>

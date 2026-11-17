@@ -1,8 +1,17 @@
 import { useEffect, useRef } from "react";
 
+interface StarNode {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  twinkle: number;
+}
+
 const GridBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const nodesRef = useRef<{ x: number; y: number; vx: number; vy: number }[]>([]);
+  const nodesRef = useRef<StarNode[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
@@ -53,7 +62,7 @@ const GridBackground = () => {
     let animationFrameId: number;
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const nodes = nodesRef.current as any[];
+      const nodes = nodesRef.current;
       const mouse = mouseRef.current;
       const maxDist = 120;
 
@@ -138,7 +147,7 @@ const GridBackground = () => {
         const mdx = n.x - mouse.x;
         const mdy = n.y - mouse.y;
         const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mDist < 100) {
+        if (mDist < 100 && mDist > 0) {
           n.x += (mdx / mDist) * 0.5;
           n.y += (mdy / mDist) * 0.5;
         }

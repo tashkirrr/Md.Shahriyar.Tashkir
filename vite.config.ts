@@ -12,6 +12,17 @@ export default defineConfig({
       overlay: false,
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules/framer-motion")) return "motion";
+          if (id.includes("node_modules/react")) return "react-vendor";
+          if (id.includes("node_modules/@radix-ui")) return "radix-vendor";
+        },
+      },
+    },
+  },
   plugins: [react()],
   resolve: {
     alias: {

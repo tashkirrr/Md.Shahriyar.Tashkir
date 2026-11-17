@@ -2,13 +2,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink, Star, GitFork, Calendar, Code2 } from "lucide-react";
 
 interface GitHubRepo {
-  id: number;
+  id: number | string;
   name: string;
   description: string | null;
   html_url: string;
   language: string | null;
-  stargazers_count: number;
-  forks_count: number;
+  stargazers_count?: number;
+  forks_count?: number;
   updated_at?: string;
   topics?: string[];
 }
@@ -63,16 +63,22 @@ const RepoModal = ({ repo, onClose }: RepoModalProps) => {
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-3 sm:gap-4">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Star size={14} className="text-yellow-500 sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm font-semibold">{repo.stargazers_count}</span>
+              {(repo.stargazers_count !== undefined || repo.forks_count !== undefined) && (
+                <div className="flex items-center gap-3 sm:gap-4">
+                  {repo.stargazers_count !== undefined && (
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <Star size={14} className="text-yellow-500 sm:w-4 sm:h-4" />
+                      <span className="text-xs sm:text-sm font-semibold">{repo.stargazers_count}</span>
+                    </div>
+                  )}
+                  {repo.forks_count !== undefined && (
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <GitFork size={14} className="text-blue-500 sm:w-4 sm:h-4" />
+                      <span className="text-xs sm:text-sm font-semibold">{repo.forks_count}</span>
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <GitFork size={14} className="text-blue-500 sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm font-semibold">{repo.forks_count}</span>
-                </div>
-              </div>
+              )}
             </div>
 
             <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-8">

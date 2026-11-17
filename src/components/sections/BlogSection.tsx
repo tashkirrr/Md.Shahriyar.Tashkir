@@ -14,9 +14,24 @@ const BLOG_POSTS_PER_PAGE = 9;
 const MEDIUM_CACHE_KEY = "medium_posts";
 const MEDIUM_CACHE_TTL = 30 * 60 * 1000;
 
+const toPlainText = (html: string) => {
+  const document = new DOMParser().parseFromString(html, "text/html");
+  document.querySelectorAll("script, style").forEach((element) => element.remove());
+  return document.body.textContent?.replace(/\s+/g, " ").trim() ?? "";
+};
+
+const safeHttpsUrl = (value: string) => {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
+};
+
 const readCachedPosts = () => {
   try {
-    const cached = sessionStorage.getItem(MEDIUM_CACHE_KEY);
+    const cached = localStorage.getItem(MEDIUM_CACHE_KEY);
     if (!cached) return null;
 
     const parsed = JSON.parse(cached) as { posts?: MediumPost[]; timestamp?: number };
@@ -24,11 +39,7 @@ const readCachedPosts = () => {
       return null;
     }
 
-    if (Date.now() - parsed.timestamp > MEDIUM_CACHE_TTL) {
-      return null;
-    }
-
-    return parsed.posts;
+    return { posts: parsed.posts, timestamp: parsed.timestamp };
   } catch {
     return null;
   }
@@ -40,54 +51,59 @@ const BlogSection = () => {
   const [posts, setPosts] = useState<MediumPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedLink, setExpandedLink] = useState<string | null>(null);
   const [lastSynced, setLastSynced] = useState<string>("Loading...");
 
   const fetchPosts = useCallback(async () => {
     const cachedPosts = readCachedPosts();
     if (cachedPosts) {
-      setPosts(cachedPosts);
-      setLoading(false);
-      return;
+      setPosts(cachedPosts.posts);
+      setLastSynced(new Date(cachedPosts.timestamp).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }));
+      if (Date.now() - cachedPosts.timestamp < MEDIUM_CACHE_TTL) {
+        setLoading(false);
+        return;
+      }
     }
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1000); // 1s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     try {
       const res = await fetch(
         "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@tashkir2006",
         { signal: controller.signal }
       );
-      clearTimeout(timeoutId);
-
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
 
       if (data.status === "ok" && data.items) {
         const mapped: MediumPost[] = data.items.map((item: Record<string, unknown>) => {
           const title = String(item.title ?? "");
-          const link = String(item.link ?? "");
+          const link = safeHttpsUrl(String(item.link ?? ""));
           const pubDateString = String(item.pubDate ?? "");
           const descriptionHtml = String(item.description ?? "");
           const imgMatch = descriptionHtml.match(/<img[^>]+src="([^"><]+)"/);
+          const publishedAt = new Date(pubDateString);
 
           return {
             title,
             link,
-            pubDate: new Date(pubDateString).toLocaleDateString("en-US", {
+            pubDate: Number.isNaN(publishedAt.getTime()) ? "Date unavailable" : publishedAt.toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
               day: "numeric",
             }),
-            description: descriptionHtml.replace(/<[^>]+>/g, "").slice(0, 120) + "...",
-            thumbnail: imgMatch?.[1] || "",
-            content: String(item.content ?? item.description ?? ""),
+            description: `${toPlainText(descriptionHtml).slice(0, 120)}...`,
+            thumbnail: imgMatch ? safeHttpsUrl(imgMatch[1]) : "",
+            content: toPlainText(String(item.content ?? item.description ?? "")),
           };
-        });
+        }).filter((post) => post.link);
         setPosts(mapped);
         try {
-          sessionStorage.setItem(MEDIUM_CACHE_KEY, JSON.stringify({
+          localStorage.setItem(MEDIUM_CACHE_KEY, JSON.stringify({
             posts: mapped,
             timestamp: Date.now(),
           }));
@@ -98,8 +114,8 @@ const BlogSection = () => {
       }
     } catch (err) {
       console.error("Failed to fetch Medium posts:", err);
-      setPosts([]); // Show empty state on error
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }, []);
@@ -110,7 +126,7 @@ const BlogSection = () => {
       if (document.visibilityState === "visible") {
         fetchPosts();
       }
-    }, 30000); // 30s sync
+    }, MEDIUM_CACHE_TTL);
     return () => clearInterval(pollInterval);
   }, [fetchPosts]);
 
@@ -161,7 +177,7 @@ const BlogSection = () => {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="bento-item group cursor-pointer min-h-[160px] flex flex-col"
-                onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
+                onClick={() => setExpandedLink(expandedLink === post.link ? null : post.link)}
               >
                 {post.thumbnail && (
                   <div className="h-40 rounded-lg overflow-hidden mb-4 bg-secondary">
@@ -189,7 +205,7 @@ const BlogSection = () => {
 
                 {/* Inline Expanded Content */}
                 <AnimatePresence>
-                  {expandedIndex === i && (
+                  {expandedLink === post.link && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -198,10 +214,9 @@ const BlogSection = () => {
                       className="overflow-hidden"
                     >
                       <div className="mt-4 pt-4 border-t border-border">
-                        <div
-                          className="prose prose-invert prose-sm max-h-[60vh] overflow-y-auto text-foreground/80 text-xs leading-relaxed"
-                          dangerouslySetInnerHTML={{ __html: post.content }}
-                        />
+                        <p className="prose prose-invert prose-sm max-h-[60vh] overflow-y-auto whitespace-pre-wrap text-foreground/80 text-xs leading-relaxed">
+                          {post.content}
+                        </p>
                         <div className="flex items-center gap-3 mt-4 pt-3 border-t border-border">
                           <a
                             href={post.link}
@@ -213,7 +228,7 @@ const BlogSection = () => {
                             Open on Medium <ExternalLink size={12} />
                           </a>
                           <button
-                            onClick={(e) => { e.stopPropagation(); setExpandedIndex(null); }}
+                            onClick={(e) => { e.stopPropagation(); setExpandedLink(null); }}
                             className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-secondary text-foreground text-xs min-h-[44px]"
                           >
                             <X size={12} /> Close
